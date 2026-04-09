@@ -1,0 +1,44 @@
+name: cafemuin
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - ./public_html:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - g5_net
+
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: cafemuin
+      MYSQL_USER: cafemuin
+      MYSQL_PASSWORD: 'cafemuin!#%&9'
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+      - ./init_db:/docker-entrypoint-initdb.d
+    networks:
+      - g5_net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    depends_on:
+      - db
+    networks:
+      - g5_net
+
+networks:
+  g5_net:
+    driver: bridge

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /********************************************************
 ■ Basic : 기본
@@ -396,7 +396,7 @@ body input:focus, body select:focus, body textarea:focus{outline-color:#000;}
 #hd #gnb .menu_list .dep2_ul{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);width:170px;background:#fff;border:1px solid #ddd;padding:20px 0;}
 #hd #gnb .menu_list .dep2_a{display:block;padding:10px;font-size:16px;line-height:1.4;text-align:center;transition:all 0.3s;}
 #hd #gnb .menu_list .dep2_a:focus,
-#hd #gnb .menu_list .dep2_a:hover{color:#349105;}
+#hd #gnb .menu_list .dep2_a:hover{color:#fa5f03;}
 #hd .all_btn{position:relative;width:35px;height:35px;}
 #hd .all_btn .bar{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100%;height:2px;background:#333;transition:all 0.3s;}
 #hd .all_btn .bar1{margin-top:-9px;}
@@ -418,11 +418,11 @@ body input:focus, body select:focus, body textarea:focus{outline-color:#000;}
 #pc_all_menu .menu_list .dep1_li{width: calc((100% - 180px) / 4);}
 #pc_all_menu .menu_list .dep1_a{display:block;padding:20px 0;border-bottom:1px solid #ddd;font-size:18px;font-weight:700;transition:all 0.3s;}
 #pc_all_menu .menu_list .dep1_a.on,
-#pc_all_menu .menu_list .dep1_a:hover{color:#349105;}
+#pc_all_menu .menu_list .dep1_a:hover{color:#fa5f03;}
 #pc_all_menu .menu_list .dep2_ul{margin-top:20px;}
 #pc_all_menu .menu_list .dep2_a{display:block;font-size:16px;line-height:1.4;color:#777;padding:7px 0;transition:all 0.3s;}
 #pc_all_menu .menu_list .dep2_a:focus,
-#pc_all_menu .menu_list .dep2_a:hover{color:#349105;}
+#pc_all_menu .menu_list .dep2_a:hover{color:#fa5f03;}
 
 #m_all_menu{display:none;position:absolute;top:100%;left:0;width:100%;padding:0 15px 50px;background:#fff;border-top:1px solid #ddd;overflow-y:auto;max-height:calc(100vh - 150px);}
 #m_all_menu .menu_list .dep1_a{display:block;font-size:16px;font-weight:700;padding:17px 60px 17px 0;border-bottom:1px solid #ddd;position:relative;}
@@ -481,7 +481,7 @@ body input:focus, body select:focus, body textarea:focus{outline-color:#000;}
 
 /*메인 공통*/
 .main_tit_box{margin-bottom:50px;}
-.main_tit_box small{display:block;font-size:26px;line-height:1;font-weight:700;color:#349105;margin-bottom:20px;}
+.main_tit_box small{display:block;font-size:26px;line-height:1;font-weight:700;color:#fa5f03;margin-bottom:20px;}
 .main_tit_box h2{font-size:42px;line-height:1.4;word-break:keep-all;}
 
 a.main_more{position:absolute;top:58px;right:15px;z-index:1;font-size:16px;height:29px;line-height:31px;background:url('/thema/Basic/img/main_more.png') no-repeat right center;padding-right:40px;}
@@ -531,7 +531,7 @@ a.main_more{position:absolute;top:58px;right:15px;z-index:1;font-size:16px;heigh
 	#hd .hd_top .dis-mo > button{margin-left:10px;}
 	#hd .hd_top .dis-mo img{height:24px;width:auto;}
 	#hd .hd_top .dis-mo a.hd_cart{position:relative;text-align:center;}
-	#hd .hd_top .dis-mo a.hd_cart .cart_count{position:absolute;top:-12px;right:-4px;width:18px;height:18px;line-height:20px;border-radius:50%;background:#349105;color:#fff;font-size:10px;}
+	#hd .hd_top .dis-mo a.hd_cart .cart_count{position:absolute;top:-12px;right:-4px;width:18px;height:18px;line-height:20px;border-radius:50%;background:#fa5f03;color:#fff;font-size:10px;}
 
 	/*푸터*/
 	#ft.sub{margin-top:100px;}
@@ -623,13 +623,13 @@ a.main_more{position:absolute;top:58px;right:15px;z-index:1;font-size:16px;heigh
 .m_path_ul{ display:none;}
 .m_path.sub .m_path_ul{ display:block; }
 .m_path_dep1{ display:none; position:relative; z-index:99; }
-.m_path_dep1 > a{display:block; position:relative; height:55px; line-height:55px; font-size:16px; color:#fff; background:#349105; padding:0 50px 0 15px; }
+.m_path_dep1 > a{display:block; position:relative; height:55px; line-height:55px; font-size:16px; color:#fff; background:#fa5f03; padding:0 50px 0 15px; }
 .m_path_dep1 > a::after{content:""; position:absolute; top:50%; right:15px; width:26px; height:26px; margin-top:-13px; background:url('/thema/Basic/img/m_path_arrow.png') no-repeat center / contain; transition:all 0.3s;}
 .m_path_dep1.on > a::after{ transform:rotate(180deg);}
 .m_path_dep2_ul{ display:none; position:absolute; top:100%; left:0; width:100%; padding:15px; background:#fff; }
 .m_path_dep2 > a{ position:relative; display:block; font-size:15px; height:40px; line-height:40px; transition:all 0.3s; }
 .m_path_dep2.on > a,
-.m_path_dep2:hover > a{ color:#349105;}
+.m_path_dep2:hover > a{ color:#fa5f03;}
 
 /*서브 타이틀*/
 .sub_top_tit{font-size:52px;line-height:1.2;font-weight:700;text-align:center;}

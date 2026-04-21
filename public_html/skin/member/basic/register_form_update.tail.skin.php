@@ -58,3 +58,31 @@ if ($w == "" && $default['de_sms_use1'] && $receive_number)
 // SMS 문자전송 끝
 //----------------------------------------------------------
 ?>
+
+$mb_dir = G5_DATA_PATH.'/member_biz';
+if(!is_dir($mb_dir)) {
+    @mkdir($mb_dir, G5_DIR_PERMISSION);
+    @chmod($mb_dir, G5_DIR_PERMISSION);
+}
+
+if(isset($_FILES['biz_cert_file']) && is_uploaded_file($_FILES['biz_cert_file']['tmp_name'])) {
+    $filename = $_FILES['biz_cert_file']['name'];
+    $ext = strtolower(substr(strrchr($filename, "."), 1));
+    $allowed_ext = array('jpg', 'jpeg', 'png', 'gif', 'pdf');
+    
+    if(in_array($ext, $allowed_ext)) {
+        $new_filename = 'biz_'.$mb_id.'_'.time().'.'.$ext;
+        $dest_path = $mb_dir.'/'.$new_filename;
+        
+        if ($w == 'u' && $member['mb_3']) {
+            @unlink($mb_dir.'/'.$member['mb_3']);
+        }
+        
+        move_uploaded_file($_FILES['biz_cert_file']['tmp_name'], $dest_path);
+        @chmod($dest_path, G5_FILE_PERMISSION);
+        
+        sql_query(" update {$g5['member_table']} set mb_3 = '{$new_filename}' where mb_id = '{$mb_id}' ");
+    } else {
+        alert('사업자등록증은 이미지 또는 PDF 파일만 업로드 가능합니다.');
+    }
+}

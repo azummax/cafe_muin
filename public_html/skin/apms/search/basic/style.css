@@ -142,3 +142,89 @@
     .item-row .item-list.cm_new_card .cm_new_price { font-size: 14px !important; }
     .item-row .item-list.cm_new_card .cm_new_cust_price { font-size: 13px !important; }
 }
+
+/* =============================================
+   검색박스 CSS 아이콘 버튼
+   ============================================= */
+.shop_search_box1 .shop_search .inner_box button.search_icon_btn {
+    position: absolute;
+    top: 0; right: 0;
+    width: 56px; height: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.shop_search_box1 .shop_search .inner_box button.search_icon_btn:hover {
+    color: #fa5f03;
+}
+
+/* =============================================
+   검색 결과 카운트 + 정렬 영역 (shop_search_box2)
+   ============================================= */
+.shop_search_box2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 0;
+}
+.shop_search_box2 .search_total {
+    margin-right: auto;
+    font-size: 15px;
+    color: #555;
+    font-weight: 400;
+    line-height: 1.4;
+}
+.shop_search_box2 .search_total strong {
+    font-weight: 700;
+    color: #111;
+}
+
+/* =============================================
+   정렬 셀렉트 박스 커스텀
+   ============================================= */
+.cm_sort_wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.cm_sort_wrap select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 40px;
+    padding: 0 40px 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+    min-width: 120px;
+}
+.cm_sort_wrap select:hover,
+.cm_sort_wrap select:focus {
+    border-color: #fa5f03;
+}
+.cm_sort_wrap .cm_sort_arrow {
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+@media all and (max-width:768px) {
+    .shop_search_box2 .search_total { font-size: 13px; }
+    .cm_sort_wrap select { font-size: 13px; height: 36px; padding: 0 34px 0 12px; min-width: 100px; }
+}

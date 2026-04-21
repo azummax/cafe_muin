@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 
 .search-box { border:1px solid #ddd; background:#fafafa; padding:20px 15px 3px; margin-bottom:15px; }
 .label-sp { margin-right:10px; }
@@ -51,7 +51,7 @@
 .item-row .item-list .txt_box .price{display:flex;align-items:flex-end;}
 .item-row .item-list .txt_box .price > b{font-size:24px;margin-right:auto;padding-right:15px;}
 .item-row .item-list .txt_box .price > span{font-size:20px;}
-.item-row .item-list .txt_box .price > span .dc{color:#349105;margin-left:10px;}
+.item-row .item-list .txt_box .price > span .dc{color:#fa5f03;margin-left:10px;}
 
 @media all and (max-width:1200px){
 	/*��ǰ�˻� ����Ʈ*/

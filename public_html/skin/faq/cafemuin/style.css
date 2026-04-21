@@ -1,0 +1,111 @@
+/* =============================
+   카페뮌 FAQ 스킨 스타일
+   ============================= */
+
+/* ── 카테고리 탭 ── */
+.cm-faq-category { margin-bottom: 50px; text-align: left; }
+.cm-faq-cat-ul { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.cm-faq-cat-a {
+    display: block; padding: 12px 32px;
+    font-size: 16px; font-weight: 500; color: #555;
+    background: #f5f5f5; border-radius: 40px;
+    text-decoration: none; border-bottom: none;
+    transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.cm-faq-cat-li.on .cm-faq-cat-a,
+.cm-faq-cat-a:hover { background: #222; color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+/* ── FAQ 아이템 리스트 ── */
+.cm-faq-list { list-style: none; margin: 0; padding: 0; }
+
+.cm-faq-item { border-bottom: 1px solid #ebebeb; }
+.cm-faq-item:first-child { border-top: 2px solid #222; }
+
+/* ── 질문 버튼 ── */
+.cm-faq-q {
+    display: flex; align-items: center; gap: 24px;
+    width: 100%; padding: 30px 20px;
+    background: none; border: none; cursor: pointer;
+    text-align: left; transition: background .2s ease;
+}
+.cm-faq-q:hover { background: #fafafa; }
+
+.cm-faq-q-label {
+    flex-shrink: 0;
+    width: auto;
+    color: var(--cm-primary, #fa5f03);
+    font-size: 24px; font-weight: 800; font-family: Montserrat, sans-serif;
+    line-height: 1;
+}
+
+.cm-faq-q-text {
+    flex: 1; font-size: 17px; font-weight: 500; color: #222; line-height: 1.6;
+}
+
+.cm-faq-arrow {
+    flex-shrink: 0; color: #999;
+    transition: transform .25s ease;
+}
+.cm-faq-item.open .cm-faq-arrow { transform: rotate(180deg); color: var(--cm-primary, #fa5f03); }
+.cm-faq-item.open .cm-faq-q-text { font-weight: 600; color: #000; }
+
+/* ── 답변 영역 ── */
+.cm-faq-a {
+    display: none; /* jQuery slideDown을 위해 초기 숨김 */
+    padding: 35px 20px 45px; 
+    border-top: 1px dashed #eee; 
+    background: #f9f9f9;
+}
+.cm-faq-a-inner {
+    display: flex; gap: 24px; align-items: flex-start;
+}
+
+.cm-faq-a-label {
+    flex-shrink: 0;
+    width: auto; 
+    color: #444;
+    font-size: 24px; font-weight: 700; font-family: Montserrat, sans-serif;
+    line-height: 1; margin-top: 0;
+}
+
+.cm-faq-a-content { flex: 1; font-size: 16px; line-height: 1.8; color: #555; }
+
+/* ── 빈 상태 ── */
+.cm-faq-empty {
+    text-align: center; padding: 80px 20px; color: #bbb;
+}
+.cm-faq-empty p { margin-top: 16px; font-size: 15px; color: #aaa; }
+.cm-faq-admin-btn {
+    display: inline-block; margin-top: 16px;
+    padding: 10px 22px; border-radius: 6px;
+    background: #222; color: #fff !important; text-decoration: none;
+    font-size: 13px;
+}
+.cm-faq-admin-btn:hover {
+    background: var(--cm-primary, #E8721B);
+    color: #fff !important;
+}
+
+/* ── 모바일 반응형 (FAQ 탭 레이아웃 교정) ── */
+@media (max-width: 768px) {
+    .cm-faq-category { margin-bottom: 30px; }
+    .cm-faq-cat-ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 모바일에서는 무조건 2열 꽉 찬 그리드 */
+        gap: 8px; /* 간격 살짝 축소 */
+    }
+    .cm-faq-cat-a {
+        padding: 12px 0; /* 좌우 여백을 없애고 */
+        text-align: center; /* 텍스트를 중앙 정렬하여 균형감 줌 */
+        font-size: 14px; /* 모바일 크기에 맞춰 폰트 미세조정 */
+        width: 100%; /* 그리드 셀을 꽉 채움 */
+        box-sizing: border-box;
+    }
+    
+    /* 질문 답변 간격 등 모바일 최적화 */
+    .cm-faq-q { padding: 20px 15px; gap: 15px; }
+    .cm-faq-a { padding: 25px 15px 35px; }
+    .cm-faq-q-label, .cm-faq-a-label { font-size: 20px; }
+    .cm-faq-q-text { font-size: 15px; }
+    .cm-faq-a-content { font-size: 14px; }
+}

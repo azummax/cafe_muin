@@ -134,7 +134,7 @@
 .view_file li:last-child{margin-bottom:0;}
 .view_file li a{ padding-left: 40px; font-size:16px; line-height:26px; background-image:url('/thema/Basic/img/view_file01.png'); background-position:left center; background-repeat:no-repeat; transition:all 0.3s; }
 .view_file li a:hover,
-.view_file li a:focus{ color:#349105; text-decoration:underline; text-underline-position:under; background-image:url('/thema/Basic/img/view_file02.png');}
+.view_file li a:focus{ color:#fa5f03; text-decoration:underline; text-underline-position:under; background-image:url('/thema/Basic/img/view_file02.png');}
 .view_file.view_link{ margin-top:15px;}
 .view_file.view_link li a{ background-image:url('/thema/Basic/img/view_link01.png');}
 .view_file.view_link li a:hover,

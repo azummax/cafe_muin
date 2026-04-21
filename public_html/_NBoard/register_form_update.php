@@ -5,6 +5,13 @@ include_once(G5_LIB_PATH.'/register.lib.php');
 include_once(G5_LIB_PATH.'/mailer.lib.php');
 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
+// 사용자 요청에 따라, 현재 register_form.skin.php 에 존재하지 않는 
+// 필드들에 대한 관리자 필수설정을 강제로 해제하여 검증을 통과시킵니다.
+$config['cf_req_hp'] = 0;
+$config['cf_req_signature'] = 0;
+$config['cf_req_profile'] = 0;
+$config['cf_req_homepage'] = 0;
+
 // 리퍼러 체크
 referer_check();
 

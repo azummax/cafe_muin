@@ -40,7 +40,7 @@
 .list-board .list-body .wr-subject { padding:10px; text-align:left; }
 .list-board .list-body .wr-subject a { display:block; word-break:break-all;transition:all 0.3s;}
 .list-board .list-body .wr-subject a:hover,
-.list-board .list-body .wr-subject a:focus{text-decoration:underline;text-underline-position:under;color:#349105;}
+.list-board .list-body .wr-subject a:focus{text-decoration:underline;text-underline-position:under;color:#fa5f03;}
 .list-board .list-body li.bg-light .wr-subject a{color:#222; font-weight:700;}
 .list-board .list-body li.bg-light .wr-subject a:hover,
 .list-board .list-body li.bg-light .wr-subject a:focus{color:var(--cm-primary); text-decoration:underline; text-underline-position:under;}

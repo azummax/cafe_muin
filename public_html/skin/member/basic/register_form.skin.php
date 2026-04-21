@@ -151,7 +151,7 @@ if($header_skin)
 
 		<div class="reg_write_box">
 			<div class="reg_tit">
-				<label for="reg_mb_tel">대표번호 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+				<label for="reg_mb_tel">연락처 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
 			</div>
 			<div class="reg_content">
 				<input type="text" name="mb_tel" value="<?php echo get_text($member['mb_tel']) ?>" id="reg_mb_tel" required class="input_com" maxlength="20" placeholder="- 없이 입력하세요.">
@@ -539,9 +539,9 @@ function fregisterform_submit(f)
 		}
 	}
 
-	// 대표번호 검사
+	// 연락처 검사
 	if (f.mb_tel.value.length < 1) {
-		alert("대표번호를 입력하십시오.");
+		alert("연락처를 입력하십시오.");
 		f.mb_tel.focus();
 		return false;
 	}

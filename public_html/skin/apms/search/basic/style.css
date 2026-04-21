@@ -103,3 +103,42 @@
 	.item-row .item-list .txt_box .price > span .dc{display:none;}
 	.item-row .item-list .txt_box .price > b.call{display:inline-block;}
 }
+/* =============================================
+   cm_new_card 구조 스타일 (검색 결과 = 제품 리스트 동일)
+   ============================================= */
+.item-row .item-list.cm_new_card { display: block; }
+.item-row .item-list.cm_new_card .cm_new_img_box { margin-bottom: 18px; }
+.item-row .item-list.cm_new_card .cm_new_txt_box { padding: 0; }
+.item-row .item-list.cm_new_card .cm_new_title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.item-row .item-list.cm_new_card .cm_new_price_wrap {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.item-row .item-list.cm_new_card .cm_new_price { font-size: 18px !important; }
+.item-row .item-list.cm_new_card .cm_new_cust_price { font-size: 16px !important; }
+
+@media all and (max-width:1200px) {
+    .item-row .item-list.cm_new_card .cm_new_title { font-size: 16px; }
+    .item-row .item-list.cm_new_card .cm_new_price { font-size: 16px !important; }
+    .item-row .item-list.cm_new_card .cm_new_cust_price { font-size: 14px !important; }
+}
+@media all and (max-width:1024px) {
+    .item-row .item-list.cm_new_card .cm_new_title { font-size: 15px; }
+    .item-row .item-list.cm_new_card .cm_new_price { font-size: 15px !important; }
+    .item-row .item-list.cm_new_card .cm_new_cust_price { font-size: 13px !important; }
+}
+@media all and (max-width:768px) {
+    .item-row .item-list.cm_new_card .cm_new_title { font-size: 14px; }
+    .item-row .item-list.cm_new_card .cm_new_price { font-size: 14px !important; }
+    .item-row .item-list.cm_new_card .cm_new_cust_price { font-size: 13px !important; }
+}

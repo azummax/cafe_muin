@@ -61,7 +61,17 @@ if($header_skin)
 				<label for="reg_mb_password">비밀번호 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
 			</div>
 			<div class="reg_content">
-				<input type="password" name="mb_password" id="reg_mb_password" <?php echo $required ?> class="input_com" minlength="3" maxlength="20">
+				<div style="position:relative;">
+					<input type="password" name="mb_password" id="reg_mb_password" <?php echo $required ?> class="input_com" minlength="8" maxlength="16" style="padding-right: 40px;">
+					<button type="button" class="btn_pw_toggle" onclick="togglePassword('reg_mb_password', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); border:none; background:none; cursor:pointer; color:#999; font-size:18px;"><iconify-icon icon="solar:eye-closed-linear"></iconify-icon></button>
+				</div>
+                <div id="capslock_warning" style="display:none; color:#fa5f03; font-size:12px; margin-top:5px; font-weight:600;"><iconify-icon icon="solar:danger-circle-linear" style="vertical-align:text-bottom;"></iconify-icon> Caps Lock이 켜져 있습니다.</div>
+				<ul id="pw_checklist" style="margin-top:10px; font-size:14px; font-weight:400; color:#999; list-style:none; padding-left:0;">
+					<li id="rule_complex" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>영문, 숫자, 특수문자 중 3종 혼용 (8~16자) 혹은 2종 혼용 (10~16자) 조합</li>
+					<li id="rule_repeat" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>동일한 문자/숫자 3회 이상 반복 사용불가 (예: aaa, 111 불가)</li>
+					<li id="rule_seq" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>키보드 연속배열 3회 이상 사용불가 (예: abc, 123, qwe 불가)</li>
+					<li id="rule_id" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>아이디와 동일 혹은 포함 사용불가</li>
+				</ul>
 			</div>
 		</div><!--reg_write_box end-->
 
@@ -70,7 +80,13 @@ if($header_skin)
 				<label for="reg_mb_password_re">비밀번호 확인 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
 			</div>
 			<div class="reg_content">
-				<input type="password" name="mb_password_re" id="reg_mb_password_re" <?php echo $required ?> class="input_com" minlength="3" maxlength="20">
+                <div style="position:relative;">
+				    <input type="password" name="mb_password_re" id="reg_mb_password_re" <?php echo $required ?> class="input_com" minlength="8" maxlength="16" style="padding-right: 40px;">
+                    <button type="button" class="btn_pw_toggle" onclick="togglePassword('reg_mb_password_re', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); border:none; background:none; cursor:pointer; color:#999; font-size:18px;"><iconify-icon icon="solar:eye-closed-linear"></iconify-icon></button>
+                </div>
+				<ul id="pw_re_checklist" style="margin-top:10px; font-size:14px; font-weight:400; color:#999; list-style:none; padding-left:0;">
+					<li id="rule_match" style="padding-left:12px; position:relative; line-height:1.4;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>비밀번호가 일치합니다.</li>
+				</ul>
 			</div>
 		</div><!--reg_write_box end-->
 	</div><!--reg_form_box end-->
@@ -252,7 +268,117 @@ if($header_skin)
 </form>
 
 <script>
+// Toggle Password Visibility
+function togglePassword(inputId, btn) {
+    var input = document.getElementById(inputId);
+    var icon = btn.querySelector('iconify-icon');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.setAttribute('icon', 'solar:eye-linear');
+    } else {
+        input.type = 'password';
+        icon.setAttribute('icon', 'solar:eye-closed-linear');
+    }
+}
+
 $(function() {
+    // Caps Lock detection
+    $('#reg_mb_password, #reg_mb_password_re').on('keyup keydown', function(e) {
+        var capslock = e.originalEvent.getModifierState && e.originalEvent.getModifierState('CapsLock');
+        if (capslock) {
+            $('#capslock_warning').show();
+        } else {
+            $('#capslock_warning').hide();
+        }
+    });
+
+    var pwInput = $('#reg_mb_password');
+    var pwReInput = $('#reg_mb_password_re');
+    var idInput = $('#reg_mb_id');
+	window.isPasswordValid = false;
+
+    function checkPasswordRules() {
+        var pw = pwInput.val();
+        var id = idInput.val();
+        
+        // 1. 조합 규칙 (대, 소, 숫자, 특문 중 3종 8자, 2종 10자)
+        var types = 0;
+        if (/[A-Z]/.test(pw)) types++;
+        if (/[a-z]/.test(pw)) types++;
+        if (/[0-9]/.test(pw)) types++;
+        if (/[!@#$%^&*+=-]/.test(pw) || /[^A-Za-z0-9]/.test(pw)) types++;
+        
+        var isComplex = false;
+        if (types >= 3 && pw.length >= 8 && pw.length <= 16) {
+            isComplex = true;
+        } else if (types >= 2 && pw.length >= 10 && pw.length <= 16) {
+            isComplex = true;
+        }
+
+        // 2. 동일문자 3회 반복 (aaa, 111)
+        var isRepeated = /(.)\1\1/.test(pw);
+        
+        // 3. 키보드 또는 알파벳/숫자 순차 3회 연속 배열 (abc, 123, qwe)
+        var seqs = ['01234567890', 'qwertyuiop', 'asdfghjkl', 'zxcvbnm', 'abcdefghijklmnopqrstuvwxyz'];
+        var isSeq = false;
+        var pLower = pw.toLowerCase();
+        for (var i = 0; i < pLower.length - 2; i++) {
+            var chunk = pLower.substr(i, 3);
+            for (var j = 0; j < seqs.length; j++) {
+                if (seqs[j].indexOf(chunk) !== -1 || seqs[j].split('').reverse().join('').indexOf(chunk) !== -1) {
+                    isSeq = true;
+                    break;
+                }
+            }
+            if (isSeq) break;
+        }
+
+        // 4. 아이디 포함 여부
+        var isIdIncluded = false;
+        if (id.length >= 3 && pLower.indexOf(id.toLowerCase()) !== -1) {
+            isIdIncluded = true;
+        }
+
+        // UI 업데이트 (#34a853 = Green)
+        updateListItem('#rule_complex', isComplex);
+        updateListItem('#rule_repeat', pw.length > 0 && !isRepeated);
+        updateListItem('#rule_seq', pw.length > 0 && !isSeq);
+        updateListItem('#rule_id', pw.length > 0 && !isIdIncluded);
+
+		window.isPasswordValid = isComplex && !isRepeated && !isSeq && !isIdIncluded;
+    }
+
+    function updateListItem(selector, isValid) {
+        var el = $(selector);
+        var dot = el.find('span');
+        if (isValid) {
+            el.css('color', '#34a853');
+            dot.css('background-color', '#34a853');
+        } else {
+            el.css('color', '#999');
+            dot.css('background-color', '#ccc');
+        }
+    }
+
+    pwInput.on('input', function() {
+        checkPasswordRules();
+        checkPasswordRe();
+    });
+
+	idInput.on('input', function() {
+        if(pwInput.val().length > 0) checkPasswordRules();
+    });
+
+    pwReInput.on('input', function() {
+        checkPasswordRe();
+    });
+
+    function checkPasswordRe() {
+        var pw = pwInput.val();
+        var pwRe = pwReInput.val();
+        var isMatch = (pw.length > 0 && pw === pwRe);
+        updateListItem('#rule_match', isMatch);
+    }
 
 	$("#reg_zip_find").css("display", "inline-block");
 
@@ -328,10 +454,25 @@ function fregisterform_submit(f)
 	}
 
 	if (f.w.value == "") {
-		if (f.mb_password.value.length < 3) {
-			alert("비밀번호를 3글자 이상 입력하십시오.");
+		if (f.mb_password.value.length < 1) {
+			alert("비밀번호를 입력해 주십시오.");
 			f.mb_password.focus();
 			return false;
+		}
+
+		if (!window.isPasswordValid) {
+			alert("비밀번호 정책을 모두 만족하지 않았습니다. 하단의 정책 체크리스트를 확인해주세요.");
+			f.mb_password.focus();
+			return false;
+		}
+	} else {
+		// 정보 수정 시 비밀번호를 입력한 경우에만 검사
+		if (f.mb_password.value.length > 0) {
+			if (!window.isPasswordValid) {
+				alert("비밀번호 정책을 모두 만족하지 않았습니다. 하단의 정책 체크리스트를 확인해주세요.");
+				f.mb_password.focus();
+				return false;
+			}
 		}
 	}
 
@@ -342,8 +483,8 @@ function fregisterform_submit(f)
 	}
 
 	if (f.mb_password.value.length > 0) {
-		if (f.mb_password_re.value.length < 3) {
-			alert("비밀번호를 3글자 이상 입력하십시오.");
+		if (f.mb_password_re.value.length < 1) {
+			alert("비밀번호 확인칸에 값을 입력하십시오.");
 			f.mb_password_re.focus();
 			return false;
 		}

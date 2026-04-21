@@ -4,13 +4,21 @@
 </div>
 <ul class="menu_list">
 <?php
+	if (!function_exists('cm_qa_href')) {
+		function cm_qa_href($href, $is_member) {
+			if (strpos($href, 'qawrite.php') !== false && !$is_member) {
+				return G5_BBS_URL . '/login.php?url=' . urlencode($href);
+			}
+			return $href;
+		}
+	}
 	for ($i=1; $i < $menu_cnt; $i++) {
 
 		if(!$menu[$i]['gr_id']) continue;
 
 ?>
 	<li class="dep1_li">
-		<a class="dep1_a <?php echo $menu[$i]['on'];?>" href="<?php echo $menu[$i]['href'];?>"<?php echo $menu[$i]['target'];?>>
+		<a class="dep1_a <?php echo $menu[$i]['on'];?>" href="<?php echo cm_qa_href($menu[$i]['href'], $is_member);?>"<?php echo $menu[$i]['target'];?>>
 			<span class="m_menu_text"><?php echo strip_tags($menu[$i]['name']);?></span>
             <?php if($menu[$i]['is_sub']) { ?>
                 <iconify-icon icon="solar:alt-arrow-down-linear" class="m_menu_arrow"></iconify-icon>
@@ -20,7 +28,7 @@
 			<ul class="dep2_ul">
 				<?php for($j=0; $j < count($menu[$i]['sub']); $j++) { ?>
 					<li class="dep2_li">
-						<a href="<?php echo $menu[$i]['sub'][$j]['href'];?>" class="dep2_a <?php echo $menu[$i]['sub'][$j]['on'];?>"<?php echo $menu[$i]['sub'][$j]['target'];?>>
+						<a href="<?php echo cm_qa_href($menu[$i]['sub'][$j]['href'], $is_member);?>" class="dep2_a <?php echo $menu[$i]['sub'][$j]['on'];?>"<?php echo $menu[$i]['sub'][$j]['target'];?>>
 							<?php echo $menu[$i]['sub'][$j]['name'];?>
 						</a>
 						<!-- <?php if($menu[$i]['sub'][$j]['is_sub']) { // Is Sub Menu ?>

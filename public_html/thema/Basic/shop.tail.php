@@ -24,7 +24,6 @@ if (!defined('_GNUBOARD_'))
 			<ul class="ft_links">
 				<li class="ft_link_li ft_link_bold"><a href="<?php echo G5_BBS_URL; ?>/page.php?hid=privacy">개인정보처리방침</a></li>
 				<li class="ft_link_li"><a href="<?php echo G5_BBS_URL; ?>/page.php?hid=provision">이용약관</a></li>
-				<li class="ft_link_li"><a href="<?php echo G5_BBS_URL; ?>/qalist.php">고객센터</a></li>
 				<li class="ft_link_li ft_link_icon"><a href="http://www.speranzafood.co.kr" target="_blank">희망그린식품 브랜드 <iconify-icon icon="solar:arrow-right-up-linear" width="14"></iconify-icon></a></li>
 			</ul>
 			<div class="ft_right_group">
@@ -87,7 +86,15 @@ if (!defined('_GNUBOARD_'))
 		</div>
 	</button>
 	<?php } ?>
-	<button id="chat_btn" onclick="location.href='<?php echo G5_BBS_URL; ?>/qalist.php';" title="문의하기" style="display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; box-sizing:border-box; padding:0; border:none;">
+	<?php
+	// 1:1 문의 글쓰기 URL
+	$qa_write_url = G5_BBS_URL . '/qawrite.php';
+	// 로그인 여부에 따라 이동 URL 결정 (미로그인 시 로그인 페이지 → 글쓰기 페이지로 redirect)
+	$chat_href = $is_member
+		? $qa_write_url
+		: G5_BBS_URL . '/login.php?url=' . urlencode($qa_write_url);
+	?>
+	<button id="chat_btn" onclick="location.href='<?php echo $chat_href; ?>';" title="문의하기" style="display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; box-sizing:border-box; padding:0; border:none;">
 		<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; transform: translateY(-1px);">
 			<iconify-icon icon="solar:chat-round-dots-linear" width="24" height="24" style="margin-bottom:8px;"></iconify-icon>
 			<span style="font-size:13px; line-height:1; font-weight:400; letter-spacing:0;">문의하기</span>

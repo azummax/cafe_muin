@@ -171,7 +171,7 @@ if($header_skin)
 					<div class="addr_input">
 						<input type="text" name="mb_addr1" value="<?php echo get_text($member['mb_addr1']) ?>" id="reg_mb_addr1" required class="input_com" size="50" placeholder="기본주소">
 						<input type="text" name="mb_addr2" value="<?php echo get_text($member['mb_addr2']) ?>" id="reg_mb_addr2" class="input_com" size="50" placeholder="상세주소">
-						<input type="text" name="mb_addr3" value="<?php echo get_text($member['mb_addr3']) ?>" id="reg_mb_addr3" class="input_com" size="50" readonly="readonly" placeholder="참고항목">
+						<input type="hidden" name="mb_addr3" value="<?php echo get_text($member['mb_addr3']) ?>" id="reg_mb_addr3">
 						<input type="hidden" name="mb_addr_jibeon" value="<?php echo get_text($member['mb_addr_jibeon']); ?>">
 					</div>
 				</div>

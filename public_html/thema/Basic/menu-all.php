@@ -1,9 +1,13 @@
 <ul class="menu_list">
 <?php
 	if (!function_exists('cm_qa_href')) {
-		function cm_qa_href($href, $is_member) {
-			if (strpos($href, 'qawrite.php') !== false && !$is_member) {
-				return G5_BBS_URL . '/login.php?url=' . urlencode($href);
+		function cm_qa_href($href, $is_member, $name = '') {
+			if (strpos($href, 'qawrite.php') !== false || strpos($href, 'qalist.php') !== false || trim(strip_tags($name)) == '문의하기') {
+				$qa_url = G5_BBS_URL . '/qawrite.php';
+				if (!$is_member) {
+					return G5_BBS_URL . '/login.php?url=' . urlencode($qa_url);
+				}
+				return $qa_url;
 			}
 			return $href;
 		}
@@ -19,7 +23,7 @@
 				$dep1_href = $menu[$i]['sub'][0]['href'];
 			}
 		}
-		$dep1_href = cm_qa_href($dep1_href, $is_member);
+		$dep1_href = cm_qa_href($dep1_href, $is_member, $menu[$i]['name']);
 ?>
 	<li class="dep1_li">
 		<a class="dep1_a<?php if( $i == 1){ echo ' all_start'; } ?> <?php echo $menu[$i]['on'];?>" href="<?php echo $dep1_href;?>"<?php echo $menu[$i]['target'];?>>
@@ -29,7 +33,7 @@
 			<ul class="dep2_ul">
 				<?php for($j=0; $j < count($menu[$i]['sub']); $j++) { ?>
 					<li class="dep2_li">
-						<a href="<?php echo cm_qa_href($menu[$i]['sub'][$j]['href'], $is_member);?>" class="dep2_a <?php echo $menu[$i]['sub'][$j]['on'];?>"<?php echo $menu[$i]['sub'][$j]['target'];?>>
+						<a href="<?php echo cm_qa_href($menu[$i]['sub'][$j]['href'], $is_member, $menu[$i]['sub'][$j]['name']);?>" class="dep2_a <?php echo $menu[$i]['sub'][$j]['on'];?>"<?php echo $menu[$i]['sub'][$j]['target'];?>>
 							<?php echo $menu[$i]['sub'][$j]['name'];?>
 						</a>
 						<!-- <?php if($menu[$i]['sub'][$j]['is_sub']) { // Is Sub Menu ?>

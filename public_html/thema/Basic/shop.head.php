@@ -1,23 +1,6 @@
 <?php
 if (!defined('_GNUBOARD_')) exit;
 include_once(THEMA_PATH . '/assets/thema.php');
-
-// "문의하기" 메뉴 강제 추가 (고객지원 하위)
-if (isset($menu) && is_array($menu)) {
-    for ($i = 1; $i < count($menu); $i++) {
-        if (isset($menu[$i]['name']) && strpos($menu[$i]['name'], '고객지원') !== false) {
-            $menu[$i]['sub'][] = array(
-                'name' => '문의하기',
-                'href' => G5_BBS_URL.'/qalist.php',
-                'on'   => '',
-                'is_sub' => false,
-                'target' => ''
-            );
-            $menu[$i]['is_sub'] = true;
-            break;
-        }
-    }
-}
 ?>
 
 <a class="skip_a" href="#common_content">본문내용 바로가기</a>
@@ -130,43 +113,89 @@ if (isset($menu) && is_array($menu)) {
 
     <!-- 서브 페이지 경로 / 타이틀 -->
     <?php if ($page_title): ?>
-        <ul class="sub_path at-container mgB80">
-            <li><a href="/" title="홈"><iconify-icon icon="solar:home-linear" width="18" height="18"></iconify-icon></a></li>
-            <?php if ($group['gr_subject'] && $group['gr_subject'] != $page_title): ?>
-                <li><?php echo $group['gr_subject']; ?></li>
+        <?php
+        // 현재 활성화된 메뉴명 추적
+        $active_dep1_name = '';
+        $active_dep2_name = '';
+
+        if(isset($menu) && is_array($menu) && isset($menu_cnt)) {
+            for($i = 1; $i < $menu_cnt; $i++) {
+                if(isset($menu[$i]['on']) && $menu[$i]['on'] == 'on') {
+                    $active_dep1_name = $menu[$i]['name'];
+                    if(isset($menu[$i]['sub']) && is_array($menu[$i]['sub'])) {
+                        for($j = 0; $j < count($menu[$i]['sub']); $j++) {
+                            if(isset($menu[$i]['sub'][$j]['on']) && $menu[$i]['sub'][$j]['on'] == 'on') {
+                                $active_dep2_name = $menu[$i]['sub'][$j]['name'];
+                                break;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        // 메뉴 이름이 있으면 우선 사용, 없으면 기존 page_title / gr_subject 폴백
+        $breadcrumb_dep1 = $active_dep1_name ? $active_dep1_name : $group['gr_subject'];
+        $breadcrumb_dep2 = $active_dep2_name ? $active_dep2_name : $page_title;
+        $main_page_title = $active_dep2_name ? $active_dep2_name : ($active_dep1_name ? $active_dep1_name : $page_title);
+        
+        // 이벤트 게시판 브레드크럼 카테고리 텍스트 노출 강제 차단
+        if(isset($bo_table) && $bo_table == 'event') {
+            $breadcrumb_dep2 = '이벤트';
+            $main_page_title = '이벤트';
+        }
+        ?>
+        <ul class="sub_path at-container mgB30">
+            <li><a href="/" title="홈"><iconify-icon icon="ph:house-light" width="18" height="18"></iconify-icon></a></li>
+            <?php if ($breadcrumb_dep1): ?>
+                <li><?php echo $breadcrumb_dep1; ?></li>
             <?php endif; ?>
-            <li><?php echo $page_title; ?></li>
+            <?php if ($breadcrumb_dep2 && $breadcrumb_dep1 != $breadcrumb_dep2): ?>
+                <li><?php echo $breadcrumb_dep2; ?></li>
+            <?php endif; ?>
         </ul>
 
-        <div class="m_path <?php echo $page_title ? 'sub' : ''; ?>">
-            <ul class="m_path_ul">
-                <?php
-                for ($i = 1; $i < $menu_cnt; $i++) {
-                    if (!$menu[$i]['gr_id']) continue;
-                    if ($menu[$i]['on'] == "on") { ?>
-                    <li class="m_path_dep1">
-                        <a class="m_path_dep1_a ellipsis" href="<?php echo $menu[$i]['href']; ?>" <?php echo $menu[$i]['target']; ?>>
-                            <?php echo $menu[$i]['name']; ?>
-                        </a>
-                        <?php if ($menu[$i]['is_sub']) { ?>
-                        <ul class="m_path_dep2_ul">
-                            <?php for ($j = 0; $j < count($menu[$i]['sub']); $j++) { ?>
-                            <li class="m_path_dep2 <?php echo $menu[$i]['sub'][$j]['on']; ?>">
-                                <a href="<?php echo $menu[$i]['sub'][$j]['href']; ?>" class="m_path_dep2_a ellipsis" <?php echo $menu[$i]['sub'][$j]['target']; ?>>
-                                    <?php echo $menu[$i]['sub'][$j]['name']; ?>
-                                </a>
-                            </li>
-                            <?php } ?>
-                        </ul>
-                        <?php } ?>
-                    </li>
-                <?php } } ?>
-            </ul>
+
+        <div class="sub_top_tit_wrap at-container mgB30" <?php echo $is_index ? '' : 'id="common_content"'; ?>>
+            <h2 class="sub_top_tit">
+                <?php echo $main_page_title; ?>
+            </h2>
         </div>
 
-        <h2 class="sub_top_tit at-container mgB80" <?php echo $is_index ? '' : 'id="common_content"'; ?>>
-            <?php echo $page_title; ?>
-        </h2>
+        <?php
+        // 제품(쇼핑몰) 카테고리가 아닌 경우에만 2차 메뉴 탭 표시
+        if (!isset($ca_id) || !$ca_id):
+            // 활성 1차 메뉴의 서브메뉴 배열 추출
+            $active_sub_menus = array();
+            if (isset($menu) && is_array($menu) && isset($menu_cnt)) {
+                for ($i = 1; $i < $menu_cnt; $i++) {
+                    if (isset($menu[$i]['on']) && $menu[$i]['on'] == 'on') {
+                        if (isset($menu[$i]['is_sub']) && $menu[$i]['is_sub'] && !empty($menu[$i]['sub'])) {
+                            $active_sub_menus = $menu[$i]['sub'];
+                        }
+                        break;
+                    }
+                }
+            }
+        ?>
+        <?php 
+          $is_board_subpage = ((basename($_SERVER['PHP_SELF']) == 'board.php' && isset($wr_id) && $wr_id) || basename($_SERVER['PHP_SELF']) == 'write.php');
+          if (!empty($active_sub_menus) && (!isset($bo_table) || $bo_table != 'event') && !$is_board_subpage): 
+        ?>
+        <nav class="sub_tab_nav at-container">
+            <ul class="sub_tab_ul">
+                <?php foreach ($active_sub_menus as $stab): ?>
+                <li class="sub_tab_li <?php echo (isset($stab['on']) && $stab['on'] == 'on') ? 'on' : ''; ?>">
+                    <a href="<?php echo $stab['href']; ?>" class="sub_tab_a" <?php echo isset($stab['target']) ? $stab['target'] : ''; ?>>
+                        <?php echo $stab['name']; ?>
+                    </a>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+        <?php endif; ?>
+        <?php endif; ?>
     <?php endif; ?>
 
     <div class="at-body" <?php echo $is_index ? 'id="common_content"' : ''; ?>>

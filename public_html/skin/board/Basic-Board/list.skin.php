@@ -1,8 +1,17 @@
 <?php
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
+if ($bo_table == 'event') {
+    $today = G5_TIME_YMD;
+    // 이벤트 기간에 따른 자동 상태 업데이트 ('진행중인 이벤트', '종료된 이벤트')
+    // 종료일이 과거면 종료된 이벤트
+    sql_query("UPDATE {$write_table} SET ca_name = '종료된 이벤트' WHERE wr_2 < '{$today}' AND wr_2 != '' AND ca_name != '종료된 이벤트'", false);
+    // 종료일이 오늘이거나 미래면 진행중인 이벤트
+    sql_query("UPDATE {$write_table} SET ca_name = '진행중인 이벤트' WHERE (wr_2 >= '{$today}' OR wr_2 = '') AND ca_name != '진행중인 이벤트'", false);
+}
+
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css" media="screen">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='.date("YmdHis").'" media="screen">', 0);
 
 // 값정리
 $boset['modal'] = (isset($boset['modal'])) ? $boset['modal'] : '';
@@ -26,7 +35,6 @@ $list_cnt = count($list);
 
 	<?php @include_once($list_skin_path.'/list.head.skin.php'); // 헤드영역 ?>
 
-	<?php if($bo_table != 'event'){ ?>
 	<div id="board_list_top">
 		<?php
 			// 총게시물수
@@ -52,12 +60,11 @@ $list_cnt = count($list);
 					<label for="stx" class="sound_only">검색어</label>
 					<input type="text" name="stx" value="<?php echo stripslashes($stx) ?>" class="input_com" maxlength="20" id="stx">
 					
-					<button type="submit" class="search_btn">검색</button>
+					<button type="submit" class="search_btn" style="margin-bottom:0 !important;"><iconify-icon icon="ph:magnifying-glass-light" width="22" height="22"></iconify-icon><span class="sound_only">검색</span></button>
 				</div>
 			</div>
 		</form>
 	</div><!--board_list_top end-->
-	<?php } ?>
 
 	<div class="list-wrap">
 		<form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post" role="form" class="form">
@@ -171,10 +178,9 @@ $list_cnt = count($list);
 						?>
 					</a>
 				</div>
-				<?php if ($write_href) { ?><a role="button" href="<?php echo $write_href ?>" class="board_btn">글쓰기</a><?php } ?>
 			</div>
 
-			<div class="list-page text-center">
+			<div class="list-page text-center" style="margin-bottom: 20px;">
 				<ul class="pagination en no-margin">
 					<?php if($prev_part_href) { ?>
 						<li><a href="<?php echo $prev_part_href;?>">이전검색</a></li>
@@ -186,24 +192,29 @@ $list_cnt = count($list);
 				</ul>
 			</div>
 
-			<?php if ($is_checkbox || $setup_href || $admin_href) { ?>
-				<div class="list-admin">
-					<div class="btn-group" role="group">
-						<?php if ($is_checkbox) { ?>
-							<button type="button" class="btn-chkall btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-check"></i><span class="hidden-xs"> 전체선택</span></button>
-							<button type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value" class="btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-times"></i><span class="hidden-xs"> 선택삭제</span></button>
-							<button type="submit" name="btn_submit" value="선택복사" onclick="document.pressed=this.value" class="btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-clipboard"></i><span class="hidden-xs"> 선택복사</span></button>
-							<button type="submit" name="btn_submit" value="선택이동" onclick="document.pressed=this.value" class="btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-arrows"></i><span class="hidden-xs"> 선택이동</span></button>
-						<?php } ?>
-						<?php if ($admin_href) { ?>
-							<a role="button" href="<?php echo $admin_href; ?>" class="btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-cog"></i><span class="hidden-xs"> 보드설정</span></a>
-						<?php } ?>
-						<?php if ($setup_href) { ?>
-							<a role="button" href="<?php echo $setup_href; ?>" class="btn btn-<?php echo $btn2;?> btn-sm win_memo"><i class="fa fa-cogs"></i><span class="hidden-xs"> 추가설정</span></a>
-						<?php } ?>
+			<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+				<?php if ($is_checkbox || $setup_href || $admin_href) { ?>
+					<div class="list-admin" style="margin: 0;">
+						<div class="btn-group" role="group">
+							<?php if ($is_checkbox) { ?>
+								<button type="button" class="btn-chkall btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-check"></i><span class="hidden-xs"> 전체선택</span></button>
+								<button type="submit" name="btn_submit" value="선택삭제" onclick="document.pressed=this.value" class="btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-times"></i><span class="hidden-xs"> 선택삭제</span></button>
+							<?php } ?>
+							<?php if ($admin_href) { ?>
+								<a role="button" href="<?php echo $admin_href; ?>" class="btn btn-<?php echo $btn1;?> btn-sm"><i class="fa fa-cog"></i><span class="hidden-xs"> 보드설정</span></a>
+							<?php } ?>
+						</div>
 					</div>
+				<?php } else { ?>
+					<div></div> <!-- empty spacer -->
+				<?php } ?>
+				
+				<div class="list-btn" style="margin: 0;">
+					<?php if ($write_href) { ?><a role="button" href="<?php echo $write_href ?>" class="board_btn" style="background:#222; color:#fff; border-radius:50px; border:none; transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center; padding:0 16px;"><i class="fa fa-pencil" style="margin-right:5px; color:#fff;"></i> 글쓰기</a><?php } ?>
 				</div>
-			<?php } ?>
+			</div>
+
+			<!-- btn and pagination wrapper replaced above -->
 		</form>
 	</div>
 

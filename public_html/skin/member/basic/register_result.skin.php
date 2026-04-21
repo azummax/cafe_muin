@@ -23,7 +23,7 @@ if($header_skin)
 <div id="register_result_box">
 	<strong>회원 가입이 완료되었습니다.</strong>
 	<p>
-		지구본의 회원이 되어주셔서 감사합니다. <br />
+		카페 뮌의 회원이 되어주셔서 감사합니다. <br />
 		가입하신 아이디와 비밀번호로 로그인 하시면 다양한 서비스를 이용하실 수 있습니다.
 	</p>
 	<?php if (is_use_email_certify()) { ?>

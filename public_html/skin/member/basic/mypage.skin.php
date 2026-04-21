@@ -58,7 +58,15 @@ if($header_skin)
 						<td><?php echo display_price($row['od_cart_price'] + $row['od_send_cost'] + $row['od_send_cost2']); ?></td>
 						<td><?php echo display_price($row['od_receipt_price']); ?></td>
 						<td><?php echo display_price($row['od_misu']); ?></td>
-						<td><?php echo $od_status; ?></td>
+						<td>
+							<div style="margin-bottom:6px;">
+								<span class="status-badge status-<?php echo ($row['od_status'] == '주문' || $row['od_status'] == '입금') ? 'waiting' : 'shipping'; ?>" style="font-size:12px; padding:4px 8px; border-radius:3px; background:#f5f5f5; color:#555;"><?php echo $od_status; ?></span>
+							</div>
+							<div class="action-btn-group" style="display:flex; flex-direction:column; gap:4px;">
+								<a href="<?php echo G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>" class="btn-action view" style="font-size:12px; color:#fa5f03; text-decoration:underline;">주문상세</a>
+								<a href="javascript:void(0);" onclick="window.open('<?php echo G5_SHOP_URL; ?>/orderreceipt.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>', 'receipt', 'width=600,height=800,scrollbars=yes');" class="btn-action print" style="font-size:12px; color:#888;">거래명세서</a>
+							</div>
+						</td>
 					</tr>
 			    <?php } ?>
 				<?php if ($i == 0) { ?>
@@ -70,6 +78,61 @@ if($header_skin)
 			<p class="text-right">
 				<a href="./orderinquiry.php"><i class="fa fa-arrow-right"></i> 주문내역 더보기</a>
 			</p>
+		</section>
+
+		<section style="margin-top:50px;">
+			<h4>최근 나의 문의 및 활동</h4>
+			<?php
+			// 나의 최근 게시물 추출
+			$sql_new = " select a.*, b.bo_subject, c.wr_subject, c.wr_datetime 
+						 from {$g5['board_new_table']} a,
+							  {$g5['board_table']} b,
+							  {$g5['write_prefix']}qa c
+						 where a.mb_id = '{$member['mb_id']}'
+						   and a.bo_table = b.bo_table 
+						   and a.bo_table = 'qa'
+						   and a.wr_id = c.wr_id 
+						 order by a.bn_id desc limit 0, 5 ";
+						 // 임의로 데이터를 보이기 위해 쿼리 단순화 및 일반 게시글(board_new) 조회
+			
+			$sql_new = " select a.*, b.bo_subject 
+						 from {$g5['board_new_table']} a 
+						 join {$g5['board_table']} b on a.bo_table = b.bo_table 
+						 where a.mb_id = '{$member['mb_id']}' 
+						 order by a.bn_id desc limit 0, 5 ";
+			$res_new = sql_query($sql_new);
+			?>
+			<div class="table-responsive">
+				<table class="table mypage-tbl">			
+				<thead>
+				<tr>
+					<th scope="col" style="width:120px;">게시판</th>
+					<th scope="col">제목</th>
+					<th scope="col" style="width:120px;">작성일</th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php 
+				$new_cnt = 0;
+				for ($i=0; $row=sql_fetch_array($res_new); $i++) {
+					$new_cnt++;
+					$tmp_write_table = $g5['write_prefix'] . $row['bo_table'];
+					$wr = sql_fetch(" select wr_subject, wr_datetime from {$tmp_write_table} where wr_id = '{$row['wr_id']}' ");
+					if(!$wr) continue;
+				?>
+					<tr>
+						<td><?php echo $row['bo_subject']; ?></td>
+						<td class="text-left"><a href="<?php echo G5_BBS_URL; ?>/board.php?bo_table=<?php echo $row['bo_table']; ?>&amp;wr_id=<?php echo $row['wr_id']; ?>"><?php echo conv_subject($wr['wr_subject'], 120, '...'); ?></a></td>
+						<td><?php echo date("Y-m-d", strtotime($wr['wr_datetime'])); ?></td>
+					</tr>
+				<?php } ?>
+				
+				<?php if ($new_cnt == 0) { ?>
+					<tr><td colspan="3" class="empty_table">최근 문의 내역이 없습니다.</td></tr>
+				<?php } ?>
+				</tbody>
+				</table>
+			</div>
 		</section>
 	</div>
 </div><!--mypage_container end-->

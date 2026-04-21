@@ -24,75 +24,41 @@ for ($i=1; $row=sql_fetch_array($result); $i++) {
         }
     }
 
-    echo "<li class=\"sct_li {$sct_last}\" style=\"width:{$this->img_width}px\">\n";
+    echo "<li class=\"sct_li {$sct_last}\">\n";
 
-    echo "<div class=\"sct_img\">\n";
-
-    if ($this->href) {
-        echo "<a href=\"{$this->href}{$row['it_id']}\">\n";
+    global $is_member;
+    $it_price = get_price($row);
+    $price_html = "";
+    if (!$is_member) {
+        $price_html = '<span class="cm_new_price" style="font-size:18px; color:#999;">비공개</span>';
+    } else {
+        $it_cust_price = $row['it_cust_price'];
+        if ($it_cust_price > 0 && $it_price > 0 && $it_cust_price > $it_price) {
+            $price_html = '<del class="cm_new_cust_price" style="color:#999; font-size:18px; text-decoration:line-through; margin-right:6px;">'.number_format($it_cust_price).'원</del> <span class="cm_new_price" style="color:#ff6600; font-size:18px; font-weight:500;">'.number_format($it_price).'원</span>';
+        } else {
+            $price_html = '<span class="cm_new_price" style="color:#ff6600; font-size:18px; font-weight:500;">'.number_format($it_price).'원</span>';
+        }
     }
 
+    echo "<a href=\"{$this->href}{$row['it_id']}\" class=\"cm_new_card\">\n";
+    echo "  <div class=\"cm_new_img_box\">\n";
     if ($this->view_it_img) {
         echo get_it_image($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name']))."\n";
     }
-
-    if ($this->href) {
-        echo "</a>\n";
-    }
-
-
-    if ($this->view_sns) {
-        $sns_top = $this->img_height + 10;
-        $sns_url  = G5_SHOP_URL.'/item.php?it_id='.$row['it_id'];
-        $sns_title = get_text($row['it_name']).' | '.get_text($config['cf_title']);
-        echo "<div class=\"sct_sns\">";
-        echo get_sns_share_link('facebook', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/facebook.png');
-        echo get_sns_share_link('twitter', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/twitter.png');
-        echo get_sns_share_link('googleplus', $sns_url, $sns_title, G5_SHOP_SKIN_URL.'/img/gplus.png');
-        echo "</div>\n";
-    }
-
-    echo "</div>\n";
-
-    if ($this->view_it_id) {
-        echo "<div class=\"sct_id\">&lt;".stripslashes($row['it_id'])."&gt;</div>\n";
-    }
-
-    if ($this->href) {
-        echo "<div class=\"sct_txt\"><a href=\"{$this->href}{$row['it_id']}\">\n";
-    }
-
+    echo "  </div>\n";
+    
+    echo "  <div class=\"cm_new_txt_box\">\n";
     if ($this->view_it_name) {
-        echo stripslashes($row['it_name'])."\n";
+        echo "      <strong class=\"cm_new_title\">".stripslashes($row['it_name'])."</strong>\n";
     }
-
-    if ($this->href) {
-        echo "</a></div>\n";
-    }
-
     if ($this->view_it_basic && $row['it_basic']) {
-        echo "<div class=\"sct_basic\">".stripslashes($row['it_basic'])."</div>\n";
+        echo "      <span class=\"cm_new_brand\">".stripslashes($row['it_basic'])."</span>\n";
     }
-
     if ($this->view_it_cust_price || $this->view_it_price) {
-
-        echo "<div class=\"sct_cost\">\n";
-
-        if ($this->view_it_cust_price && $row['it_cust_price']) {
-            echo "<span class=\"sct_discount\">".display_price($row['it_cust_price'])."</span>\n";
-        }
-
-        if ($this->view_it_price) {
-            echo display_price(get_price($row), $row['it_tel_inq'])."\n";
-        }
-
-        echo "</div>\n";
-
+        echo "      <div class=\"cm_new_price_wrap\">{$price_html}</div>\n";
     }
-
-    if ($this->view_it_icon) {
-        echo "<div class=\"sct_icon\">".item_icon($row)."</div>\n";
-    }
+    echo "  </div>\n";
+    echo "</a>\n";
 
 
     

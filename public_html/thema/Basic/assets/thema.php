@@ -9,11 +9,11 @@ if (!defined('_GNUBOARD_'))
  - 일반문서(hid)는 테마관리 > 일반문서의 html id 또는 메뉴설정에서 등록한 일반문서의 html id 등록
 *****************************************************************************************/
 $page_list = array(
-	"ca_id" => "상품대분류코드,상품대분류코드",
-	"gr_id" => "게시판그룹아이디,게시판그룹아이디",
-	"bo_table" => "게시판아이디,게시판아이디",
+	"ca_id" => "10",
+	"gr_id" => "",
+	"bo_table" => "notice,event,qna,faq,content,location",
 	"pid" => "login,reg,regform,regresult,regmail,confirm,password,cart,orderform,orderview,inquiry,inquiryview,ppay,ppayform,ppayresult,partner",
-	"hid" => "일반문서아이디,일반문서아이디"
+	"hid" => ""
 );
 
 /***************************************************************************************** 

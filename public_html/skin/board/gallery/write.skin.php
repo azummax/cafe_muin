@@ -133,40 +133,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css" medi
 			</div>
 		</div>
 	<?php } ?>
-	<?php if ($is_member) { // 임시 저장된 글 기능 ?>
-		<script src="<?php echo G5_JS_URL; ?>/autosave.js"></script>
-		<?php if($editor_content_js) echo $editor_content_js; ?>
-		<div class="modal fade" id="autosaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-						<h4 class="modal-title" id="myModalLabel">임시 저장된 글 목록</h4>
-					</div>
-					<div class="modal-body">
-						<div id="autosave_wrapper">
-							<div id="autosave_pop">
-								<ul></ul>
-							</div>
-						</div>	
-					</div>
-				</div>
-			</div>
-		</div>
-	<?php } ?>
+
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" for="wr_subject">제목<strong class="sound_only">필수</strong></label>
 		<div class="col-sm-10">
 			<div class="input-group">
 				<input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="form-control input-sm" size="50" maxlength="255">
-				<span class="input-group-btn">
-					<a href="<?php echo G5_BBS_URL;?>/helper.php" target="_blank" class="btn btn-black btn-sm hidden-xs win_scrap">안내</a>
-					<a href="<?php echo G5_BBS_URL;?>/helper.php?act=map" target="_blank" class="btn btn-black btn-sm hidden-xs win_scrap">지도</a>
-					<?php if ($is_member) { // 임시 저장된 글 기능 ?>
-						<button type="button" id="btn_autosave" data-toggle="modal" data-target="#autosaveModal" class="btn btn-black btn-sm">저장 (<span id="autosave_count"><?php echo $autosave_count; ?></span>)</button>
-					<?php } ?>
-				</span>
 			</div>
 		</div>
 	</div>

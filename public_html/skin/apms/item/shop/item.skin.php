@@ -229,13 +229,11 @@ $is_seller = ($it['pt_id'] && $it['pt_id'] != $config['cf_admin']) ? true : fals
 											</label>
 										</div>
 										<div class="col-sm-5">
-											<div class="input-group">
+											<div class="input-group" style="display:flex; justify-content:flex-end; align-items:center;">
+												<button type="button" class="it_qty_minus btn btn-lightgray btn-sm" style="height:35px; border-radius:0;"><iconify-icon icon="ph:minus-light" width="18" height="18"></iconify-icon><span class="sound_only">감소</span></button>
 												<label for="ct_qty_<?php echo $i; ?>" class="sound_only">수량</label>
-												<input type="text" name="ct_qty[<?php echo $it_id; ?>][]" value="<?php echo $it['it_buy_min_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="form-control input-sm" size="5">
-												<div class="input-group-btn">
-													<button type="button" class="it_qty_plus btn btn-lightgray btn-sm"><i class="fa fa-plus-circle fa-lg"></i><span class="sound_only">증가</span></button>
-													<button type="button" class="it_qty_minus btn btn-lightgray btn-sm"><i class="fa fa-minus-circle fa-lg"></i><span class="sound_only">감소</span></button>
-												</div>
+												<input type="text" name="ct_qty[<?php echo $it_id; ?>][]" value="<?php echo $it['it_buy_min_qty']; ?>" id="ct_qty_<?php echo $i; ?>" class="form-control input-sm" size="5" style="width:45px; height:35px; text-align:center; box-shadow:none; border-radius:0;">
+												<button type="button" class="it_qty_plus btn btn-lightgray btn-sm" style="height:35px; border-radius:0;"><iconify-icon icon="ph:plus-light" width="18" height="18"></iconify-icon><span class="sound_only">증가</span></button>
 											</div>
 										</div>
 									</div>
@@ -276,19 +274,23 @@ $is_seller = ($it['pt_id'] && $it['pt_id'] != $config['cf_admin']) ? true : fals
 				<?php } ?>
 
 				<?php if ($is_orderable) { ?>
-					<div class="product_btn_box">
+					<div class="product_btn_box" style="display:flex; gap:10px; margin-top:20px;">
 						<?php
 							// 상품정보 체크
 							$wish_sql = " select wi_id from {$g5['g5_shop_wish_table']} where mb_id = '{$member['mb_id']}' and it_id = '{$it['it_id']}' ";
 							$wish_row = sql_fetch($wish_sql);
 							if(!$wish_row['wi_id']){
 						?>
-						<a href="#" id="wish_item<?php echo $it['it_id']; ?>" class="wish_btn" onclick="apms_wishlist('<?php echo $it['it_id']; ?>'); return false;">위시리스트</a>
+						<button type="button" id="wish_item<?php echo $it['it_id']; ?>" class="wish_btn" onclick="apms_wishlist('<?php echo $it['it_id']; ?>'); return false;" style="width:56px; height:56px; border:1px solid #ddd; background:#fff; border-radius:4px; display:flex; justify-content:center; align-items:center;">
+							<iconify-icon icon="ph:heart-light" width="24" height="24" style="color:#666;"></iconify-icon><span class="sound_only">위시리스트</span>
+						</button>
 						<?php }else{ ?>
-						<a href="#" id="wish_item<?php echo $it['it_id']; ?>" class="wish_btn on" onclick="apms_wishlist('<?php echo $it['it_id']; ?>'); return false;">위시리스트</a>
+						<button type="button" id="wish_item<?php echo $it['it_id']; ?>" class="wish_btn on" onclick="apms_wishlist('<?php echo $it['it_id']; ?>'); return false;" style="width:56px; height:56px; border:1px solid #ddd; background:#fff; border-radius:4px; display:flex; justify-content:center; align-items:center;">
+							<iconify-icon icon="ph:heart-fill" width="24" height="24" style="color:#ff4d4f;"></iconify-icon><span class="sound_only">위시리스트</span>
+						</button>
 						<?php } ?>
-						<input type="submit" onclick="document.pressed=this.value;" value="장바구니">
-						<input type="submit" onclick="document.pressed=this.value;" value="구매하기">
+						<button type="submit" onclick="document.pressed='장바구니';" style="flex:1; height:56px; line-height:56px; background:#333; color:#fff; border:none; border-radius:4px; font-size:16px; font-weight:500;">장바구니</button>
+						<button type="submit" onclick="document.pressed='구매하기';" style="flex:1; height:56px; line-height:56px; background:var(--cm-primary); color:#fff; border:none; border-radius:4px; font-size:16px; font-weight:500;">구매하기</button>
 					</div>
 					<?php if ($naverpay_button_js) { ?>
 						<div class="pay_naver"><?php echo $naverpay_request_js.$naverpay_button_js; ?></div>
@@ -352,7 +354,7 @@ $is_seller = ($it['pt_id'] && $it['pt_id'] != $config['cf_admin']) ? true : fals
 				return false;
 			}
 
-			if($(".it_opt_list").size() < 1) {
+			if($(".it_opt_list").length < 1) {
 				alert("선택옵션을 선택해 주십시오.");
 				return false;
 			}

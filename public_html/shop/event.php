@@ -212,6 +212,7 @@ if($ev_id) { //아이디가 있을 때는 상품리스트
 		include_once(G5_PATH.'/head.sub.php');
 		if(!USE_G5_THEME) @include_once(THEMA_PATH.'/head.sub.php');
 	} else {
+		$g5['title'] = '이벤트';
 		include_once('./_head.php');
 	}
 

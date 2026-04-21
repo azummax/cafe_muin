@@ -41,9 +41,9 @@
 .list-board .list-body .wr-subject a { display:block; word-break:break-all;transition:all 0.3s;}
 .list-board .list-body .wr-subject a:hover,
 .list-board .list-body .wr-subject a:focus{text-decoration:underline;text-underline-position:under;color:#349105;}
-.list-board .list-body li.bg-light .wr-subject a{color:#333;}
+.list-board .list-body li.bg-light .wr-subject a{color:#222; font-weight:700;}
 .list-board .list-body li.bg-light .wr-subject a:hover,
-.list-board .list-body li.bg-light .wr-subject a:focus{text-decoration:none;}
+.list-board .list-body li.bg-light .wr-subject a:focus{color:var(--cm-primary); text-decoration:underline; text-underline-position:under;}
 .list-board .list-body .wr-name a { display:block; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal; overflow:hidden; }
 .list-board .list-body .thumb-img { position:relative; width:46px; height:46px; margin:0px auto; }
 .list-board .list-body .thumb-icon { position:relative; width:46px; height:46px; display:table; margin:0px auto; }
@@ -68,11 +68,13 @@
 
 /*************** 기본 end ***************************************************************************************************************************************************************************************/
 
-.list_notice{display:block;width:55px;height:30px;line-height:32px;text-align:center;background:#349105;color:#fff;font-size:16px;font-weight:500;margin:0 auto;}
+.list_notice{display:block;width:55px;height:30px;line-height:32px;text-align:center;background:var(--cm-primary);color:#fff;font-size:16px;font-weight:500;margin:0 auto;}
 .div-head{padding:20px 0;border-bottom:1px solid #333;}
 .div-head > span{border-right:0;font-size:16px;font-weight:500;}
 .list-board .list-body li{background:#fff;transition:all 0.3s;}
 .list-board .list-body li:hover{background:#f5f5f5;}
+.list-board .list-body li.bg-light{background:#fafafa;}
+.list-board .list-body li.bg-light:hover{background:#f0f4ec;}
 .list-board .list-body li > div{font-size:16px;line-height:1.4;padding:10px 0;height:55px;}
 
 @media all and (max-width:1024px){

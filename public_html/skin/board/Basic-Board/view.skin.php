@@ -44,16 +44,18 @@ if($view['as_icon']) {
 		}
 	?>
 
-	<?php if($bo_table == 'content'){ ?>
-		<a href="<?php echo G5_BBS_URL;?>/page.php?hid=content" class="view_list_btn">목록보기</a>
-	<?php }else{ ?>
-		<a href="<?php echo $list_href ?>" class="view_list_btn">목록보기</a>
-	<?php } ?>
+	<div style="text-align: center; margin: 40px 0 20px;">
+		<?php if($bo_table == 'content'){ ?>
+			<a href="<?php echo G5_BBS_URL;?>/page.php?hid=content" class="view_list_btn" style="background:#222; color:#fff; border-radius:50px; border:none; transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center;">목록보기</a>
+		<?php }else{ ?>
+			<a href="<?php echo $list_href ?>" class="view_list_btn" style="background:#222; color:#fff; border-radius:50px; border:none; transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center;">목록보기</a>
+		<?php } ?>
+	</div>
 
 	<div class="view_paging">
 		<?php if ($next_href) { ?>
-		<a role="button" href="<?php echo $next_href.$modal_query; ?>" class="view_paging_prev">
-			<b>PREV</b>
+		<a role="button" href="<?php echo $next_href.$modal_query; ?>" class="view_paging_prev" style="color:#222; font-weight:500;">
+			<b style="color:#222;">PREV</b>
 			<p class="ellipsis"><?php  echo $next['wr_subject']; ?></p>
 		</a>
 		<?php }else{ ?>
@@ -63,8 +65,8 @@ if($view['as_icon']) {
 		</div>
 		<?php } ?>
 		<?php if ($prev_href) { ?>
-		<a role="button" href="<?php echo $prev_href.$modal_query; ?>" class="view_paging_next">
-			<b>NEXT</b>
+		<a role="button" href="<?php echo $prev_href.$modal_query; ?>" class="view_paging_next" style="color:#222; font-weight:500;">
+			<b style="color:#222;">NEXT</b>
 			<p class="ellipsis"><?php  echo $prev['wr_subject']; ?></p>
 		</a>
 		<?php }else{ ?>
@@ -76,25 +78,19 @@ if($view['as_icon']) {
 	</div>
 
 	<div class="view_btn_box">
-		<div>
-			<?php if ($copy_href) { ?>
-				<a role="button" href="<?php echo $copy_href ?>" class="board_btn" onclick="board_move(this.href); return false;">복사</a>
-			<?php } ?>
-			<?php if ($move_href) { ?>
-				<a role="button" href="<?php echo $move_href ?>" class="board_btn" onclick="board_move(this.href); return false;">이동</a>
-			<?php } ?>
+		<div class="admin_btn_wrap">
 			<?php if ($delete_href) { ?>
-				<a role="button" href="<?php echo $delete_href ?>" class="board_btn" onclick="<?php echo (APMS_PIM) ? 'modal_' : '';?>del(this.href); return false;">삭제</a>
+				<a role="button" href="<?php echo $delete_href ?>" class="board_btn btn-black-round" onclick="del(this.href); return false;"><i class="fa fa-times"></i> 삭제</a>
 			<?php } ?>
 			<?php if ($update_href) { ?>
-				<a role="button" href="<?php echo $update_href ?>" class="board_btn" <?php echo $modal_target;?>>수정</a>
+				<a role="button" href="<?php echo $update_href ?>" class="board_btn btn-black-round"><i class="fa fa-cog"></i> 수정</a>
 			<?php } ?>
 			<?php if ($reply_href) { ?>
-				<!-- <a role="button" href="<?php echo $reply_href ?>" class="board_btn"<?php echo $modal_target;?>>답변</a> -->
+				<!-- <a role="button" href="<?php echo $reply_href ?>" class="board_btn btn-black-round"><i class="fa fa-reply"></i> 답변</a> -->
 			<?php } ?>
 		</div>
 		<?php if ($write_href) { ?>
-			<a role="button" href="<?php echo $write_href ?>" class="board_btn"<?php echo $modal_target;?>>글쓰기</a>
+			<a role="button" href="<?php echo $write_href ?>" class="board_btn btn-black-round"><i class="fa fa-pencil"></i> 글쓰기</a>
 		<?php } ?>
 	</div>
 </div>

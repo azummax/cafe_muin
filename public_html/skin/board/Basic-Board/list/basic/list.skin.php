@@ -111,7 +111,7 @@ $num_notice = ($is_thumb) ? '*' : '<b class="list_notice">공지</b>';
 			$li_css = ' bg-light';
 			$list[$i]['num'] = $num_notice;
 			$list[$i]['ca_name'] = '';
-			$list[$i]['subject'] = '<b class="wr-hidden" style="color:#349105;margin-right:5px;">[공지]</b>'.$list[$i]['subject'];
+			$list[$i]['subject'] = '<b class="wr-hidden" style="color:var(--cm-primary);margin-right:5px;">[공지]</b>'.$list[$i]['subject'];
 			//$wr_icon = ($is_thumb) ? '' : '<b class="wr-hidden list_notice">공지</b>';
 		} else {
 			if($is_category && $list[$i]['ca_name']) {
@@ -185,7 +185,6 @@ $num_notice = ($is_thumb) ? '*' : '<b class="list_notice">공지</b>';
 						<span class="count hidden-xs">(<?php echo $list[$i]['wr_comment']; ?>)</span>
 					<?php } ?>
 				</a>
-				<?php if(!$list[$i]['is_notice']) { //공지가 아닐경우 ?>
 					<div class="item-details text-muted font-12 visible-xs ellipsis">
 						<?php if($is_name) { ?>
 							<span><?php echo $list[$i]['name']; ?></span>
@@ -202,10 +201,9 @@ $num_notice = ($is_thumb) ? '*' : '<b class="list_notice">공지</b>';
 						<?php if($is_nogood) { ?>
 							<span><i class="fa fa-thumbs-down"></i> <?php echo $list[$i]['wr_nogood'];?></span>
 						<?php } ?>
-						<span>조회 <?php echo $list[$i]['wr_hit']; ?></span>
 						<span>등록일 <?php echo date("Y.m.d", strtotime($list[$i]['wr_datetime'])) ?></span>
+						<span>조회 <?php echo $list[$i]['wr_hit']; ?></span>
 					</div>
-				<?php } ?>
 			</div>
 			<?php if($is_name) { ?>
 				<div class="wr-name hidden-xs">

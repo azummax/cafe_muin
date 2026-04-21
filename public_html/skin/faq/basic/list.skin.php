@@ -93,6 +93,15 @@ if ($himg_src)
 					<div id="faq_collapse<?php echo $i;?>" class="panel-collapse collapse">
 						<div class="panel-body">
 							<?php echo apms_content(conv_content($v['fa_content'], 1)); ?>
+							
+							<?php if ($is_admin) { 
+								$token = function_exists('get_admin_token') ? '&amp;token='.get_admin_token() : '';
+							?>
+							<div style="text-align: right; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee;">
+								<a href="<?php echo G5_ADMIN_URL; ?>/faqform.php?w=u&amp;fm_id=<?php echo $fm_id; ?>&amp;fa_id=<?php echo $v['fa_id']; ?>" class="btn btn-black btn-xs" style="border-radius:3px; padding:2px 10px;"><i class="fa fa-pencil"></i> 수정</a>
+								<a href="<?php echo G5_ADMIN_URL; ?>/faqformupdate.php?w=d&amp;fm_id=<?php echo $fm_id; ?>&amp;fa_id=<?php echo $v['fa_id']; ?><?php echo $token; ?>" onclick="return confirm('정말 삭제하시겠습니까?');" class="btn btn-black btn-xs" style="border-radius:3px; padding:2px 10px; margin-left:5px;"><i class="fa fa-times"></i> 삭제</a>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -126,6 +135,11 @@ if ($himg_src)
 	if ($timg_src) 
 		echo '<div id="faq_timg" class="faq-img"><img src="'.$timg_src.'" alt=""></div>';
 
-	if ($admin_href) 
-		echo '<p class="text-center"><a href="'.$admin_href.'" class="btn btn-black btn-sm">FAQ 수정</a></p>'; 
+	if ($is_admin) {
+		echo '<div style="display:flex; justify-content:flex-end; margin-top:15px; margin-bottom: 20px;">
+				<a href="'.G5_ADMIN_URL.'/faqform.php?fm_id='.$fm_id.'" class="board_btn" style="background:#222; color:#fff; border-radius:50px; border:none; transition:all 0.3s; display:inline-flex; align-items:center; justify-content:center; padding:0 16px; height: 38px; text-decoration: none;">
+					<i class="fa fa-pencil" style="margin-right:5px; color:#fff;"></i> 글쓰기
+				</a>
+			  </div>'; 
+	}
 ?>

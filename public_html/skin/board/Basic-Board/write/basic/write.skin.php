@@ -7,6 +7,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$write_skin_url.'/write.css" medi
 ?>
 
 <!-- 게시물 작성/수정 시작 { -->
+<div class="write_required_text" style="text-align: right; margin-bottom: 15px; font-family: var(--cm-font); color: #666; font-size: 15px;">
+    <span style="color:var(--cm-primary); font-weight: bold; font-size: 16px; margin-right: 3px;">*</span> 표시는 필수 입력 항목입니다.
+</div>
 <form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" role="form" class="form-horizontal">
 <input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
 <input type="hidden" name="w" value="<?php echo $w ?>">
@@ -56,10 +59,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$write_skin_url.'/write.css" medi
 	echo $option_hidden;
 ?>
 
-<?php if ($is_name) { ?>
+<?php if ($is_name && $bo_table != 'event' && !$is_admin) { ?>
 	<div class="write_box">
 		<div class="write_tit">
-			<label for="wr_name">이름<span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+			<label for="wr_name">이름<span style="color:var(--cm-primary); margin-left: 3px;">*</span><strong class="sound_only">필수</strong></label>
 		</div>
 		<div class="write_content">
 			<input type="text" name="wr_name" value="<?php echo $name ?>" id="wr_name" required class="input_com" size="10" maxlength="20">
@@ -67,10 +70,22 @@ add_stylesheet('<link rel="stylesheet" href="'.$write_skin_url.'/write.css" medi
 	</div><!--write_box end-->
 <?php } ?>
 
-<?php if ($is_password) { ?>
+<?php if ($bo_table == 'event' || $bo_table == 'qa') { // qa는 기존 호환성 위해 남겨둠, event는 이벤트 기간용 ?>
 	<div class="write_box">
 		<div class="write_tit">
-			<label for="wr_password">비밀번호<span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+			<label>이벤트 기간<span style="color:var(--cm-primary); margin-left: 3px;">*</span></label>
+		</div>
+		<div class="write_content">
+			<input type="date" name="wr_1" value="<?php echo $wr_1; ?>" required class="input_com" style="width:auto;"> <span style="margin: 0 10px;">~</span> 
+			<input type="date" name="wr_2" value="<?php echo $wr_2; ?>" required class="input_com" style="width:auto;">
+		</div>
+	</div>
+<?php } ?>
+
+<?php if ($is_password && $bo_table != 'event' && !$is_admin) { ?>
+	<div class="write_box">
+		<div class="write_tit">
+			<label for="wr_password">비밀번호<span style="color:var(--cm-primary); margin-left: 3px;">*</span><strong class="sound_only">필수</strong></label>
 		</div>	
 		<div class="write_content">
 			<input type="password" name="wr_password" id="wr_password" <?php echo $password_required ?> class="input_com" maxlength="20">
@@ -78,29 +93,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$write_skin_url.'/write.css" medi
 	</div><!--write_box end-->
 <?php } ?>
 
-<?php if ($is_email) { ?>
-	<div class="write_box">
-		<div class="write_tit">
-			<label for="wr_email">E-mail</label>
-		</div>
-		<div class="write_content">
-			<input type="text" name="wr_email" id="wr_email" value="<?php echo $email ?>" class="input_com email" size="50" maxlength="100">
-		</div>
-	</div><!--write_box end-->
-<?php } ?>
-
-<?php if ($is_homepage) { ?>
-	<div class="write_box">
-		<div class="write_tit">
-			<label for="wr_homepage">홈페이지</label>
-		</div>
-		<div class="write_content">
-			<input type="text" name="wr_homepage" id="wr_homepage" value="<?php echo $homepage ?>" class="input_com" size="50">
-		</div>
-	</div><!--write_box end-->
-<?php } ?>
-
-<?php if ($option) { ?>
+<?php if ($option && $bo_table != 'event') { ?>
 	<div class="write_box option_box">
 		<div class="write_tit">
 			<label>옵션</label>
@@ -112,58 +105,37 @@ add_stylesheet('<link rel="stylesheet" href="'.$write_skin_url.'/write.css" medi
 <?php } ?>
 
 <?php if ($is_category) { ?>
+	<?php if ($bo_table == 'event') { ?>
+		<input type="hidden" name="ca_name" id="ca_name" value="진행중인 이벤트">
+	<?php } else { ?>
 	<div class="write_box">
 		<div class="write_tit">
-			<label>분류</label>
+			<label>분류<span style="color:var(--cm-primary); margin-left: 3px;">*</span></label>
 		</div>
 		<div class="write_content">
-			<select name="ca_name" id="ca_name" required class="input_com">
+			<select name="ca_name" id="ca_name" required class="input_com" style="width:100%; border:0; background:transparent;">
 				<option value="">선택하세요</option>
 				<?php echo $category_option ?>
 			</select>
 		</div>
 	</div><!--write_box end-->
-<?php } ?>
-
-<?php if ($is_member) { // 임시 저장된 글 기능 ?>
-	<script src="<?php echo G5_JS_URL; ?>/autosave.js"></script>
-	<?php if($editor_content_js) echo $editor_content_js; ?>
-	<div class="modal fade" id="autosaveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					<h4 class="modal-title" id="myModalLabel">임시 저장된 글</h4>
-				</div>
-				<div class="modal-body">
-					<div id="autosave_wrapper">
-						<div id="autosave_pop">
-							<ul></ul>
-						</div>
-					</div>	
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php } ?>
 <?php } ?>
 
 <div class="write_box">
 	<div class="write_tit">
-		<label for="wr_subject">제목<span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+		<label for="wr_subject">제목<span style="color:var(--cm-primary); margin-left: 3px;">*</span><strong class="sound_only">필수</strong></label>
 	</div>
 	<div class="write_content">
 		<div class="subject_box">
-			<input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="input_com" size="50" maxlength="255">
-			<?php if ($is_member) { // 임시 저장된 글 기능 ?>
-				<button type="button" id="btn_autosave" data-toggle="modal" data-target="#autosaveModal">저장</button>
-			<?php } ?>
+			<input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="input_com" size="50" maxlength="255" style="border-radius: 5px;">
 		</div>
 	</div>
 </div><!--write_box end-->
 
 <div class="write_box">
 	<div class="write_tit">
-		<label for="wr_content">내용<span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+		<label for="wr_content">내용<span style="color:var(--cm-primary); margin-left: 3px;">*</span><strong class="sound_only">필수</strong></label>
 	</div>
 	<div class="write_content">
 		<?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
@@ -177,49 +149,85 @@ add_stylesheet('<link rel="stylesheet" href="'.$write_skin_url.'/write.css" medi
 	</div>
 </div><!--write_box end-->
 
-<div class="write_box">
-	<div class="write_tit">
-		<label for="wr_link1">링크</label>
-	</div>
-	<div class="write_content">
-		<?php for ($i=1; $is_link && $i<=G5_LINK_COUNT; $i++) { ?>
-			<div class="link_box">
-				<input type="text" name="wr_link<?php echo $i ?>" value="<?php echo $write['wr_link'.$i]; ?>" id="wr_link<?php echo $i ?>" class="input_com" size="50">
-				<?php if($i == "1") { ?>
-					<p class="write_desc">※유튜브, 비메오 등 동영상 공유주소 등록시 해당 동영상은 본문 자동실행</p>
-				<?php } ?>
-			</div>
-		<?php } ?>
-	</div>
-</div><!--write_box end-->
-
 <?php if ($is_file) { ?>
-	<div class="write_box">
-		<div class="write_tit">
-			<label>첨부파일</label>
-		</div>
-		<div class="write_content">
-			<?php for ($i=0; $is_file && $i<$file_count; $i++) { ?>
+	<?php if ($bo_table == 'event' && $file_count > 0): ?>
+		<!-- 썸네일 (이벤트 전용) -->
+		<div class="write_box">
+			<div class="write_tit">
+				<label>썸네일 이미지<span style="color:var(--cm-primary); margin-left: 3px;">*</span></label>
+			</div>
+			<div class="write_content">
+				<?php $i = 0; ?>
 				<div class="file_box">
 					<div class="file_upload">
 						<?php if( $w == 'u' && $file[$i]['source']){ echo '<p class="file_name ellipsis on">'.$file[$i]['source'].'</p>'; }else{ ?>
 							<p class="file_name ellipsis"></p>
 						<?php } ?>
-						<input type="file" name="bf_file[]" id="write_file<?php echo $i+1 ?>" title="첨부파일 <?php echo $i+1 ?> : 용량 <?php echo $upload_max_filesize ?> 이하만 업로드 가능" class="file_input">
-						<label for="write_file<?php echo $i+1 ?>" class="file_label">파일등록</label>
+						<input type="file" name="bf_file[]" id="write_file<?php echo $i+1 ?>" title="썸네일 이미지 (필수)" class="file_input">
+						<label for="write_file<?php echo $i+1 ?>" class="file_label">썸네일 첨부</label>
 					</div>
-					<?php if($is_file_content){ ?>
-						<input type="text" name="bf_content[<?php echo $i ?>]" value="<?php echo $file[$i]['bf_content']; ?>" class="input_com file_desc" placeholder="이미지에 대한 설명을 입력하세요.">
-					<?php } ?>
+					<p style="margin-top:8px; font-size:13px; color:#888;">* 이벤트 리스트에 보여질 썸네일 이미지를 등록해주세요 (권장크기: 자유)</p>
 					<?php if($w == 'u' && $file[$i]['file']) { ?>
-						<span class="com_ck file_remove">
+						<span class="com_ck file_remove" style="margin-left: 10px;">
 							<input type="checkbox" id="bf_file_del<?php echo $i ?>" name="bf_file_del[<?php echo $i;  ?>]" value="1" ><label for="bf_file_del<?php echo $i ?>">삭제</label>
 						</span>
 					<?php } ?>
 				</div>
-			<?php } ?>
+			</div>
 		</div>
-	</div><!--write_box end-->
+
+		<!-- 일반 첨부파일 -->
+		<?php if ($file_count > 1): ?>
+		<div class="write_box">
+			<div class="write_tit">
+				<label>첨부파일</label>
+			</div>
+			<div class="write_content">
+				<?php for ($i=1; $is_file && $i<$file_count; $i++) { ?>
+					<div class="file_box">
+						<div class="file_upload">
+							<?php if( $w == 'u' && $file[$i]['source']){ echo '<p class="file_name ellipsis on">'.$file[$i]['source'].'</p>'; }else{ ?>
+								<p class="file_name ellipsis"></p>
+							<?php } ?>
+							<input type="file" name="bf_file[]" id="write_file<?php echo $i+1 ?>" title="첨부파일" class="file_input">
+							<label for="write_file<?php echo $i+1 ?>" class="file_label">파일 등록</label>
+						</div>
+						<?php if($w == 'u' && $file[$i]['file']) { ?>
+							<span class="com_ck file_remove">
+								<input type="checkbox" id="bf_file_del<?php echo $i ?>" name="bf_file_del[<?php echo $i;  ?>]" value="1" ><label for="bf_file_del<?php echo $i ?>">삭제</label>
+							</span>
+						<?php } ?>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		<?php endif; ?>
+
+	<?php else: // 이벤트 게시판이 아닐 경우 기존방식 ?>
+		<div class="write_box">
+			<div class="write_tit">
+				<label>첨부파일</label>
+			</div>
+			<div class="write_content">
+				<?php for ($i=0; $is_file && $i<$file_count; $i++) { ?>
+					<div class="file_box">
+						<div class="file_upload">
+							<?php if( $w == 'u' && $file[$i]['source']){ echo '<p class="file_name ellipsis on">'.$file[$i]['source'].'</p>'; }else{ ?>
+								<p class="file_name ellipsis"></p>
+							<?php } ?>
+							<input type="file" name="bf_file[]" id="write_file<?php echo $i+1 ?>" title="첨부파일 <?php echo ($i+1) ?>" class="file_input">
+							<label for="write_file<?php echo $i+1 ?>" class="file_label">파일 등록</label>
+						</div>
+						<?php if($w == 'u' && $file[$i]['file']) { ?>
+							<span class="com_ck file_remove">
+								<input type="checkbox" id="bf_file_del<?php echo $i ?>" name="bf_file_del[<?php echo $i;  ?>]" value="1" ><label for="bf_file_del<?php echo $i ?>">삭제</label>
+							</span>
+						<?php } ?>
+					</div>
+				<?php } ?>
+			</div>
+		</div><!--write_box end-->
+	<?php endif; ?>
 	<script>
 		$('.file_input').change(function(){
 			var file_name = $(this).val();

@@ -32,13 +32,8 @@ $reqFile = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 					<a href="<?php echo G5_BBS_URL;?>/qalist.php" class="dep2_a <?php if($reqFile == "qalist.php") echo "on"; ?>">1:1 문의</a>
 				</li>
 				<li class="dep2_li">
-					<a href="<?php echo G5_SHOP_URL;?>/wishlist.php" class="dep2_a <?php if($reqFile == "wishlist.php") echo "on"; ?>">찜한상품</a>
+					<a href="<?php echo G5_SHOP_URL;?>/wishlist.php" class="dep2_a <?php if($reqFile == "wishlist.php") echo "on"; ?>">자주 찾는 품목 (찜)</a>
 				</li>
-				<!--
-				<li class="dep2_li">
-					<a href="<?php echo G5_BBS_URL;?>/page.php?hid=my_review" class="dep2_a <?php if($hid == "my_review") echo "on"; ?>">상품후기</a>
-				</li>
-				-->
 			</ul>
 		</li>
 		<li class="dep1_li">

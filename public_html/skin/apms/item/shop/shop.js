@@ -376,12 +376,12 @@ function add_sel_option(type, id, option, price, stock)
 	opt += "<span class=\"it_opt_subj\">"+option+"</span>";
     opt += "<span class=\"it_opt_prc\">"+opt_prc+"</span>";
     opt += "</label></div><div class=\"col-sm-5\">";
-	opt += "<div class=\"input-group\"><input type=\"text\" name=\"ct_qty["+item_code+"][]\" value=\"1\" class=\"form-control input-sm\" size=\"5\">";
-    opt += "<div class=\"input-group-btn\">";
-	opt += "<button type=\"button\" class=\"it_qty_plus btn btn-sm btn-lightgray\"><i class=\"fa fa-plus-circle fa-lg\"></i><span class=\"sound_only\">증가</span></button>";
-    opt += "<button type=\"button\" class=\"it_qty_minus btn btn-sm btn-lightgray\"><i class=\"fa fa-minus-circle fa-lg\"></i><span class=\"sound_only\">감소</span></button>";
-    opt += "<button type=\"button\" class=\"it_opt_del btn btn-sm btn-lightgray\"><i class=\"fa fa-times-circle fa-lg\"></i><span class=\"sound_only\">삭제</span></button>";
-    opt += "</div></div></div></div>";
+	opt += "<div class=\"input-group\" style=\"display:flex; justify-content:flex-end; align-items:center;\">";
+    opt += "<button type=\"button\" class=\"it_qty_minus btn btn-sm btn-lightgray\" style=\"height:35px; border-radius:0;\"><iconify-icon icon=\"ph:minus-light\" width=\"18\" height=\"18\"></iconify-icon><span class=\"sound_only\">감소</span></button>";
+    opt += "<input type=\"text\" name=\"ct_qty["+item_code+"][]\" value=\"1\" class=\"form-control input-sm\" size=\"5\" style=\"width:45px; height:35px; text-align:center; box-shadow:none; border-radius:0;\">";
+	opt += "<button type=\"button\" class=\"it_qty_plus btn btn-sm btn-lightgray\" style=\"height:35px; border-radius:0;\"><iconify-icon icon=\"ph:plus-light\" width=\"18\" height=\"18\"></iconify-icon><span class=\"sound_only\">증가</span></button>";
+    opt += "<button type=\"button\" class=\"it_opt_del btn btn-sm btn-lightgray\" style=\"height:35px; border-radius:0;\"><iconify-icon icon=\"ph:x-light\" width=\"18\" height=\"18\"></iconify-icon><span class=\"sound_only\">삭제</span></button>";
+    opt += "</div></div></div>";
 	if(!type) {
 		if(it_msg1) {
 			opt += "<div style=\"margin-top:10px;\"><input type=\"text\" name=\"pt_msg1["+item_code+"][]\" class=\"form-control input-sm\" placeholder=\""+it_msg1+"\"></div>";

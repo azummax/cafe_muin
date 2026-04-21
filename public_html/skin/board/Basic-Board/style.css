@@ -35,28 +35,121 @@
 }
 
 
-/*************** 기본 end ***************************************************************************************************************************************************************************************/
+/*************** 湲곕낯 end ***************************************************************************************************************************************************************************************/
 
-/*게시판 공통*/
+/*寃뚯떆??怨듯넻*/
 .input_com{border:1px solid #ddd;box-shadow:none;padding:0 15px;font-size:16px;}
 
 body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px;border:1px solid #333;background:#333;color:#fff;font-size:16px;border-radius:5px;}
 
-/*리스트 공통*/
+/*由ъ뒪??怨듯넻*/
 #board_list_top{display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:40px;}
-#board_list_top .board_total{margin-right:auto;font-size:16px;line-height:1.2;font-weight:500;}
-#board_list_top .board_total b{color:#349105;margin-left:10px;}
-#board_list_top .search_form{width:100%;max-width:445px;}
-#board_list_top .search_box{display:flex;flex-wrap:wrap;align-items:center;}
-#board_list_top .search_box select{width:125px;height:48px;margin-right:5px;background-color:#fff;padding-top:3px;}
-#board_list_top .search_box .input_box{width:calc(100% - 130px);position:relative;}
-#board_list_top .search_box .input_box input{border:1px solid #ddd;height:48px;padding:0 65px 0 15px;width:100%;}
-#board_list_top .search_box .input_box button{font-size:0;width:48px;height:48px;background:url('/thema/Basic/img/board_search.png') no-repeat center #333;position:absolute;top:0;right:0;}
+#board_list_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--cm-black, #000);
+    padding-bottom: 24px;
+    margin-bottom: 0 !important;
+}
+#board_list_top .board_total {
+    margin-right: auto;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--cm-black, #000);
+    line-height: 1.2;
+}
 
-/*리스트 분류*/
-.sub_cate_tab{font-size:0;line-height:1;margin-bottom:80px;}
-.sub_cate_tab li{display:inline-block;text-align:center;}
-.sub_cate_tab li a{font-size:18px;height:65px;line-height:65px;padding:0 15px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;transition:all 0.3s;}
+/* Remove duplicated top border from list table headers in basic themes */
+.list-board .div-head { border-top: none !important; }
+#board_list_top .board_total b {
+    font-size: 18px;
+    font-weight: 600 !important;
+    color: var(--cm-primary, #ff6600) !important;
+    margin-left: 10px;
+}
+#board_list_top .search_form { width:100%; max-width:445px; margin: 0; padding: 0; }
+#board_list_top .search_box {
+    display: flex !important;
+    gap: 4px !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-end !important;
+}
+#board_list_top .search_box select {
+    width: 130px;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 15px;
+    border: 1px solid var(--cm-border, #ddd);
+    border-radius: 6px;
+    outline: none;
+    background: #fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9l6 6l6-6'/%3E%3C/svg%3E") no-repeat right 16px center !important;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: all 0.2s;
+    font-family: inherit;
+    cursor: pointer;
+}
+#board_list_top .search_box select:focus {
+    border-color: var(--cm-primary);
+}
+
+#board_list_top .search_box .input_box {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--cm-border, #ddd) !important;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    transition: all 0.2s;
+    width:280px;
+}
+#board_list_top .search_box .input_box:focus-within {
+    border-color: var(--cm-primary) !important;
+}
+
+#board_list_top .search_box .input_box input {
+    border: none !important;
+    border-radius: 0;
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    font-size: 15px;
+    outline: none;
+    background: transparent;
+    box-shadow: none !important;
+}
+
+#board_list_top .search_box .input_box button {
+    border: none !important;
+    background-color: var(--cm-black, #111) !important;
+    color: #fff !important;
+    width: 46px;
+    height: 46px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    cursor: pointer;
+    border-radius: 0 !important;
+    position: static !important;
+    transform: none !important;
+    flex-shrink: 0 !important;
+    aspect-ratio: 1/1;
+}
+
+#board_list_top .search_box .input_box button:hover {
+    background-color: var(--cm-primary, #ff6600) !important;
+}
+#board_list_top .search_box .input_box button iconify-icon {
+    color: #fff !important;
+}
+
+/*由ъ뒪??遺꾨쪟*/
+.sub_cate_tab{font-size:0;line-height:1;margin-bottom:80px; display: flex; flex-wrap: wrap;}
+.sub_cate_tab li{display:block;text-align:center; box-sizing: border-box;}
+.sub_cate_tab li a{display:block; font-size:18px;height:65px;line-height:65px;padding:0 15px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;transition:all 0.3s; box-sizing: border-box;}
 .sub_cate_tab li a:focus,
 .sub_cate_tab li a:hover,
 .sub_cate_tab li a.on{border-color:#333 !important;background:#333;color:#fff;}
@@ -77,7 +170,7 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 .sub_cate_tab.grid5 li:nth-child(-n+5) a{border-top:1px solid #ddd;}
 .sub_cate_tab.grid5 li:nth-child(5n+1) a{border-left:1px solid #ddd;}
 
-/*뷰 공통*/
+/*酉?怨듯넻*/
 .view_paging{border-top:1px solid #ddd;margin-top:60px;}
 .view_paging > a,
 .view_paging > div{display:flex;align-items:center;font-size:16px;line-height:1.2;padding:25px 35px;border-bottom:1px solid #ddd;}
@@ -96,7 +189,7 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 
 .view_list_btn{display:block;width:200px;height:56px;line-height:56px;border:1px solid #333;font-size:16px;text-align:center;margin:60px auto 0;border-radius:5px;}
 
-/*글쓰기 공통*/
+/*湲?곌린 怨듯넻*/
 .write_btn_box{display:flex;align-items:center;text-align:center;max-width:410px;margin:60px auto 0;}
 .write_btn_box a,
 .write_btn_box button{display:block;width:calc(50% - 5px);height:56px;line-height:56px;border:1px solid #333;font-size:16px;border-radius:5px;}
@@ -104,19 +197,19 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 .write_btn_box button{border-color:#333;background:#333;color:#fff;}
 
 @media all and (max-width:1024px){
-	/*게시판 공통*/
+	/*寃뚯떆??怨듯넻*/
 	.input_com{font-size:14px;}
 
 	body .board_btn{padding:0 15px;height:36px;line-height:36px;font-size:14px;}
 
-	/*리스트 공통*/
-	#board_list_top{margin-bottom:30px;}
+	/*由ъ뒪??怨듯넻*/
+	#board_list_top{margin-bottom:0 !important;}
 	#board_list_top .search_box select{width:110px;height:45px;padding-top:5px;}
 	#board_list_top .search_box .input_box{width:calc(100% - 115px);}
 	#board_list_top .search_box .input_box input{height:45px;}
-	#board_list_top .search_box .input_box button{width:45px;height:45px;}
+	#board_list_top .search_box .input_box button{width:45px;height:45px;border:none !important;display:flex;align-items:center;justify-content:center;}
 
-	/*리스트 분류*/
+	/*由ъ뒪??遺꾨쪟*/
 	.sub_cate_tab{margin-bottom:60px;}
 	.sub_cate_tab li a{font-size:16px;height:50px;line-height:50px;}
 
@@ -126,7 +219,7 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 	.sub_cate_tab.grid5 li:nth-child(-n+3) a{border-top:1px solid #ddd;}
 	.sub_cate_tab.grid5 li:nth-child(3n+1) a{border-left:1px solid #ddd;}
 
-	/*뷰 공통*/
+	/*酉?怨듯넻*/
 	.view_paging{margin-top:50px;}
 	.view_paging > a,
 	.view_paging > div{font-size:14px;padding:15px 15px 10px;}
@@ -139,20 +232,20 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 
 	.view_list_btn{width:130px;height:45px;line-height:45px;font-size:14px;margin-top:50px;}
 
-	/*글쓰기 공통*/
+	/*湲?곌린 怨듯넻*/
 	.write_btn_box{margin-top:50px;}
 	.write_btn_box a,
 	.write_btn_box button{height:50px;line-height:50px;}
 }
 @media all and (max-width:768px){
-	/*리스트 공통*/
+	/*由ъ뒪??怨듯넻*/
 	#board_list_top .board_total{font-size:14px;}
 	#board_list_top .search_form{max-width:320px;}
 	#board_list_top .search_box select{height:40px;}
 	#board_list_top .search_box .input_box input{height:40px;}
-	#board_list_top .search_box .input_box button{width:40px;height:40px;}
+	#board_list_top .search_box .input_box button{width:40px;height:40px;border:none !important;display:flex;align-items:center;justify-content:center;}
 
-	/*리스트 분류*/
+	/*由ъ뒪??遺꾨쪟*/
 	.sub_cate_tab{margin-bottom:40px;}
 	.sub_cate_tab li a{font-size:14px;height:45px;line-height:45px;}
 
@@ -174,26 +267,26 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 	.sub_cate_tab.grid5 li:nth-child(-n+2) a{border-top:1px solid #ddd;}
 	.sub_cate_tab.grid5 li:nth-child(2n+1) a{border-left:1px solid #ddd;}
 
-	/*뷰 공통*/
+	/*酉?怨듯넻*/
 	.view_paging{margin-top:40px;}
 
 	.view_list_btn{margin-top:40px;}
 
-	/*글쓰기 공통*/
+	/*湲?곌린 怨듯넻*/
 	.write_btn_box{margin-top:40px;}
 }
 @media all and (max-width:480px){
-	/*게시판 공통*/
+	/*寃뚯떆??怨듯넻*/
 	body .board_btn{padding:0 10px;height:32px;line-height:32px;font-size:13px;}
 
-	/*리스트 공통*/
+	/*由ъ뒪??怨듯넻*/
 	#board_list_top .board_total{width:100%;text-align:center;margin-bottom:10px;}
 	#board_list_top .search_form{margin:0 auto;}
 	#board_list_top .search_box select{width:100%;margin:0 0 10px;}
 	#board_list_top .search_box .input_box{width:100%;}
 }
 @media all and (max-width:380px){
-	/*리스트 분류*/
+	/*由ъ뒪??遺꾨쪟*/
 	.sub_cate_tab.grid2 li{width:100%;}
 	.sub_cate_tab.grid2 li:nth-child(-n+2) a{border-top:0;}
 	.sub_cate_tab.grid2 li:nth-child(2n+1) a{border-left:0;}

@@ -124,7 +124,7 @@
 .view_top span b{ margin-right:15px; font-weight:500; }
 
 .view_inner{ padding-top:40px; text-align:center; }
-.view_content{ font-size:16px; line-height:1.6; color:#333; margin-bottom:40px;}
+.view_content{ font-size:16px; line-height:1.6; color:#333; margin-bottom:40px; text-align:left;}
 .view_content .apms-autowrap{margin-bottom:40px;}
 
 .view_file{ position:relative; background:#f4f4f4; padding:30px 30px 30px 130px;}

@@ -7,18 +7,18 @@ add_stylesheet('<link rel="stylesheet" href="/page/common.css">');
 	<section class="cont_sec01 mgB90">
 		<div class="img_box">
 			<div class="big_thum">
-				<img src="/thema/Basic/img/brand_story03_img01.jpg" alt="지구본 카페 전경" id="big_img" />
+				<img src="/thema/Basic/img/brand_story03_img01.jpg" alt="카페 뮌 카페 전경" id="big_img" />
 			</div>
 			<ul class="sm_thum">
-				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img01.jpg" alt="지구본 카페 전경" /></li>
-				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img02.jpg" alt="지구본 카페 내부" /></li>
-				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img03.jpg" alt="지구본 디저트와 음료" /></li>
-				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img04.jpg" alt="지구본 디저트와 음료" /></li>
-				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img05.jpg" alt="지구본 카페 카운터" /></li>
+				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img01.jpg" alt="카페 뮌 카페 전경" /></li>
+				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img02.jpg" alt="카페 뮌 카페 내부" /></li>
+				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img03.jpg" alt="카페 뮌 디저트와 음료" /></li>
+				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img04.jpg" alt="카페 뮌 디저트와 음료" /></li>
+				<li><img tabindex="0" class="small_img" src="/thema/Basic/img/brand_story03_img05.jpg" alt="카페 뮌 카페 카운터" /></li>
 			</ul>
 		</div>
 		<div class="txt_box">
-			<h3 class="sub_tit01"><b>지구본 카페</b> <span>Earthborn Cafe</span></h3>
+			<h3 class="sub_tit01"><b>카페 뮌 카페</b> <span>Earthborn Cafe</span></h3>
 			<p>
 				'나'와 '지구'의 건강을 생각하는 사람들을 위해 매일 건강한 빵을 굽고 있습니다. <br />
 				이 세상에 걱정 없이 집어들 수 있는 음식이 많아지도록 새로운 대체단백질과

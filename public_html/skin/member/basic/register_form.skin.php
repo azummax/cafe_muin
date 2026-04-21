@@ -90,6 +90,31 @@ if($header_skin)
 			</div>
 		</div><!--reg_write_box end-->
 
+		<?php if (isset($req_nick) && $req_nick) { ?>
+		<div class="reg_write_box">
+			<div class="reg_tit">
+				<label for="reg_mb_nick">닉네임 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+			</div>
+			<div class="reg_content">
+				<input type="hidden" name="mb_nick_default" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>">
+				<input type="text" name="mb_nick" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>" id="reg_mb_nick" required class="input_com" size="10" maxlength="20">
+				<p class="reg_desc" style="margin-top:5px; font-size:13px; color:#666;">공백없이 한글,영문,숫자만 허용(한글2자, 영문4자 이상)</p>
+			</div>
+		</div><!--reg_write_box end-->
+		<?php } else { ?>
+		<!-- req_nick 변수 없이 무조건 닉네임 노출 -->
+		<div class="reg_write_box">
+			<div class="reg_tit">
+				<label for="reg_mb_nick">닉네임 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
+			</div>
+			<div class="reg_content">
+				<input type="hidden" name="mb_nick_default" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>">
+				<input type="text" name="mb_nick" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>" id="reg_mb_nick" required class="input_com" size="10" maxlength="20">
+				<p class="reg_desc" style="margin-top:5px; font-size:13px; color:#666;">공백없이 한글,영문,숫자만 허용(한글2자, 영문4자 이상)</p>
+			</div>
+		</div><!--reg_write_box end-->
+		<?php } ?>
+
 		<div class="reg_write_box">
 			<div class="reg_tit">
 				<label for="reg_mb_name">대표자명 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
@@ -142,7 +167,7 @@ if($header_skin)
 				<label for="biz_cert_file">사업자등록증 (파일첨부) <?php if($w == '') { ?><span class="orangered">*</span><?php } ?></label>
 			</div>
 			<div class="reg_content">
-				<input type="file" name="biz_cert_file" id="biz_cert_file" <?php echo ($w == '') ? 'required' : ''; ?>>
+				<input type="file" name="biz_cert_file" id="biz_cert_file" <?php echo ($w == '') ? 'required' : ''; ?> class="input_com" style="cursor:pointer; display:flex; align-items:center; padding:10px; height:auto; box-sizing:border-box;">
 				<?php if ($w == 'u' && $member['mb_3']) { ?>
 					<div style="margin-top:10px;">
 						<a href="/data/member_biz/<?php echo $member['mb_3'] ?>" target="_blank" style="text-decoration:underline;">등록된 사업자등록증 보기</a>
@@ -366,6 +391,16 @@ function fregisterform_submit(f)
 		if (!f.biz_cert_file.value.toLowerCase().match(/\.(gif|jpe?g|png|pdf)$/i)) {
 			alert("사업자등록증은 이미지 또는 PDF 파일만 가능합니다.");
 			f.biz_cert_file.focus();
+			return false;
+		}
+	}
+	
+	// 닉네임 검사
+	if ((f.w.value == "") || (f.w.value == "u" && f.mb_nick.defaultValue != f.mb_nick.value)) {
+		var msg = reg_mb_nick_check();
+		if (msg) {
+			alert(msg);
+			f.reg_mb_nick.select();
 			return false;
 		}
 	}

@@ -66,11 +66,11 @@ if($header_skin)
 					<button type="button" class="btn_pw_toggle" onclick="togglePassword('reg_mb_password', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); border:none; background:none; cursor:pointer; color:#999; font-size:18px;"><iconify-icon icon="solar:eye-closed-linear"></iconify-icon></button>
 				</div>
                 <div id="capslock_warning" style="display:none; color:#fa5f03; font-size:12px; margin-top:5px; font-weight:600;"><iconify-icon icon="solar:danger-circle-linear" style="vertical-align:text-bottom;"></iconify-icon> Caps Lock이 켜져 있습니다.</div>
-				<ul id="pw_checklist" style="margin-top:10px; font-size:14px; font-weight:400; color:#999; list-style:none; padding-left:0;">
-					<li id="rule_complex" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>영문, 숫자, 특수문자 중 3종 혼용 (8~16자) 혹은 2종 혼용 (10~16자) 조합</li>
-					<li id="rule_repeat" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>동일한 문자/숫자 3회 이상 반복 사용불가 (예: aaa, 111 불가)</li>
-					<li id="rule_seq" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>키보드 연속배열 3회 이상 사용불가 (예: abc, 123, qwe 불가)</li>
-					<li id="rule_id" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>아이디와 동일 혹은 포함 사용불가</li>
+				<ul id="pw_checklist" style="margin-top:10px; font-size:14px; font-weight:400; color:#555; list-style:none; padding-left:0;">
+					<li id="rule_complex" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>영문, 숫자, 특수문자 중 3종 혼용 (8~16자) 혹은 2종 혼용 (10~16자) 조합</li>
+					<li id="rule_repeat" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>동일한 문자/숫자 3회 이상 반복 사용불가 (예: aaa, 111 불가)</li>
+					<li id="rule_seq" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>키보드 연속배열 3회 이상 사용불가 (예: abc, 123, qwe 불가)</li>
+					<li id="rule_id" style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>아이디와 동일 혹은 포함 사용불가</li>
 				</ul>
 			</div>
 		</div><!--reg_write_box end-->
@@ -84,8 +84,8 @@ if($header_skin)
 				    <input type="password" name="mb_password_re" id="reg_mb_password_re" <?php echo $required ?> class="input_com" minlength="8" maxlength="16" style="padding-right: 40px;">
                     <button type="button" class="btn_pw_toggle" onclick="togglePassword('reg_mb_password_re', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); border:none; background:none; cursor:pointer; color:#999; font-size:18px;"><iconify-icon icon="solar:eye-closed-linear"></iconify-icon></button>
                 </div>
-				<ul id="pw_re_checklist" style="margin-top:10px; font-size:14px; font-weight:400; color:#999; list-style:none; padding-left:0;">
-					<li id="rule_match" style="padding-left:12px; position:relative; line-height:1.4;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#ccc; display:inline-block;"></span>비밀번호가 일치합니다.</li>
+				<ul id="pw_re_checklist" style="margin-top:10px; font-size:14px; font-weight:400; color:#555; list-style:none; padding-left:0;">
+					<li id="rule_match" style="padding-left:12px; position:relative; line-height:1.4;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>비밀번호가 일치합니다.</li>
 				</ul>
 			</div>
 		</div><!--reg_write_box end-->
@@ -114,8 +114,8 @@ if($header_skin)
 			<div class="reg_content">
 				<input type="hidden" name="mb_nick_default" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>">
 				<input type="text" name="mb_nick" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>" id="reg_mb_nick" required class="input_com" size="10" maxlength="20">
-				<ul style="margin-top:10px; font-size:14px; font-weight:400; color:#666; list-style:none; padding-left:0;">
-					<li style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#888; display:inline-block;"></span>공백없이 한글, 영문, 숫자만 허용 (한글2자, 영문4자 이상)</li>
+				<ul style="margin-top:10px; font-size:14px; font-weight:400; color:#555; list-style:none; padding-left:0;">
+					<li style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>공백없이 한글, 영문, 숫자만 허용 (한글2자, 영문4자 이상)</li>
 				</ul>
 			</div>
 		</div><!--reg_write_box end-->
@@ -128,8 +128,8 @@ if($header_skin)
 			<div class="reg_content">
 				<input type="hidden" name="mb_nick_default" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>">
 				<input type="text" name="mb_nick" value="<?php echo isset($member['mb_nick']) ? get_text($member['mb_nick']) : ''; ?>" id="reg_mb_nick" required class="input_com" size="10" maxlength="20">
-				<ul style="margin-top:10px; font-size:14px; font-weight:400; color:#666; list-style:none; padding-left:0;">
-					<li style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#888; display:inline-block;"></span>공백없이 한글, 영문, 숫자만 허용 (한글2자, 영문4자 이상)</li>
+				<ul style="margin-top:10px; font-size:14px; font-weight:400; color:#555; list-style:none; padding-left:0;">
+					<li style="padding-left:12px; position:relative; line-height:1.4; margin-bottom:4px;"><span style="position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background-color:#777; display:inline-block;"></span>공백없이 한글, 영문, 숫자만 허용 (한글2자, 영문4자 이상)</li>
 				</ul>
 			</div>
 		</div><!--reg_write_box end-->
@@ -359,8 +359,8 @@ $(function() {
             el.css('color', '#34a853');
             dot.css('background-color', '#34a853');
         } else {
-            el.css('color', '#999');
-            dot.css('background-color', '#ccc');
+            el.css('color', '#555');
+            dot.css('background-color', '#777');
         }
     }
 

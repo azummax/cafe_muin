@@ -119,108 +119,37 @@ include_once($skin_path.'/search.skin.form.php');
 
 	?>
 		<div class="item-row">
-			<a href="<?php echo $list[$i]['href'];?>" class="item-list">
-				<div class="img_box">
-					<img src="<?php echo $img['src'];?>" alt="<?php echo $img['alt'];?>">
+			<a href="<?php echo $list[$i]['href'];?>" class="item-list cm_new_card">
+				<div class="cm_new_img_box">
+					<img src="<?php echo $img['src'];?>" alt="<?php echo $img['alt'];?>" onerror="this.src='https://placehold.co/500x500/f5f5f5/cccccc?text=NO+IMAGE'">
 				</div>
-				<div class="txt_box">
-					<strong class="title ellipsis"><?php echo $list[$i]['it_name'];?></strong>
-					<div class="price">
-						<?php if($list[$i]['it_tel_inq']) { ?>
-							<b class="call">고객센터 문의</b>
-						<?php } else { ?>
-							<?php if($cur_price){ ?>
-								<b><?php echo $cur_price;?>원</b>
-							<?php } ?>
-							<span>
-								<span class="won"><?php echo number_format($list[$i]['it_price']);?>원</span>
-								<?php if($dc_per) { ?>
-									<span class="dc"><b><?php echo $dc_per;?></b>%</span>
-								<?php } ?>
-							</span>
-						<?php } ?>
-					</div>
-				</div>
-
-				<!--
-				<div class="item-content">
-					<?php if($wset['star']) { ?>
-						<div class="item-star">
-							<?php echo apms_get_star($list[$i]['it_use_avg'], $wset['star']); //평균별점 ?>
-						</div>
-					<?php } ?>
-					<div class="item-name">
-						<a href="<?php echo $list[$i]['href'];?>">
-							<b><?php echo $list[$i]['it_name'];?></b>
-							<div class="item-text">
-								<?php echo ($list[$i]['it_basic']) ? $list[$i]['it_basic'] : apms_cut_text($list[$i]['it_explan'], 120); ?>
-							</div>
-						</a>
-					</div>
-					<div class="item-price en">
-						<?php if($list[$i]['it_tel_inq']) { ?>
-							<b>Call</b>
-						<?php } else { ?>
-							<?php echo $cur_price;?>
-							<b><i class="fa fa-krw"></i> <?php echo number_format($list[$i]['it_price']);?></b>
-						<?php } ?>
-					</div>
-					<div class="item-details en">
-						<?php if($wset['cmt'] && $list[$i]['pt_comment']) { ?>
-							<span class="item-sp red">
-								<i class="fa fa-comment"></i> 
-								<?php echo number_format($list[$i]['pt_comment']);?>
-							</span>
-						<?php } ?>
-						<?php if($wset['buy'] && $list[$i]['it_sum_qty']) { ?>
-							<span class="item-sp blue">
-								<i class="fa fa-shopping-cart"></i>
-								<?php echo number_format($list[$i]['it_sum_qty']);?>
-							</span>
-						<?php } ?>
-						<?php if($wset['hit'] && $list[$i]['it_hit']) { ?>
-							<span class="item-sp gray">
-								<i class="fa fa-eye"></i> 
-								<?php echo number_format($list[$i]['it_hit']);?>
-							</span>
-						<?php } ?>
-						<?php if($list[$i]['it_point']) { ?>
-							<span class="item-sp green">
-								<i class="fa fa-gift"></i> 
-								<?php echo ($list[$i]['it_point_type'] == 2) ? $list[$i]['it_point'].'%' : number_format(get_item_point($list[$i]));?>
-							</span>
-						<?php } ?>
-						<?php if($dc_per) { ?>
-							<span class="item-sp orangered">
-								<i class="fa fa-bolt"></i> 
-								<?php echo $dc_per;?>% DC
-							</span>
-						<?php } ?>
-					</div>
-				</div>
-				<?php if($wset['sns']) { ?>
-					<div class="item-sns">
-						<?php 
-							$sns_url  = G5_SHOP_URL.'/item.php?it_id='.$list[$i]['it_id'];
-							$sns_title = get_text($list[$i]['it_name']);
-							$sns_img = $list_skin_url.'/img';
-							echo  get_sns_share_link('facebook', $sns_url, $sns_title, $sns_img.'/sns_fb.png').' ';
-							echo  get_sns_share_link('twitter', $sns_url, $sns_title, $sns_img.'/sns_twt.png').' ';
-							echo  get_sns_share_link('googleplus', $sns_url, $sns_title, $sns_img.'/sns_goo.png').' ';
-							echo  get_sns_share_link('kakaostory', $sns_url, $sns_title, $sns_img.'/sns_kakaostory.png').' ';
-							echo  get_sns_share_link('kakaotalk', $sns_url, $sns_title, $sns_img.'/sns_kakao.png').' ';
-							echo  get_sns_share_link('naverband', $sns_url, $sns_title, $sns_img.'/sns_naverband.png').' ';
-						?>
-					</div>
-				<?php } ?>
-				-->
+                <div class="cm_new_txt_box">
+                    <strong class="cm_new_title"><?php echo $list[$i]['it_name']; ?></strong>
+                    <div class="cm_new_price_wrap">
+                    <?php
+                    global $is_member;
+                    $it_price = $list[$i]['it_price'];
+                    $it_cust_price = $list[$i]['it_cust_price'];
+                    if (!$is_member) {
+                        echo '<span class="cm_new_price" style="font-size:18px; color:#999;">비공개</span>';
+                    } else {
+                        if ($it_cust_price > 0 && $it_price > 0 && $it_cust_price > $it_price) {
+                            echo '<del class="cm_new_cust_price" style="color:#999; font-size:18px; text-decoration:line-through; margin-right:6px;">'.number_format($it_cust_price).'원</del> <span class="cm_new_price" style="color:#ff6600; font-size:18px; font-weight:500;">'.number_format($it_price).'원</span>';
+                        } else {
+                            echo '<span class="cm_new_price" style="color:#ff6600; font-size:18px; font-weight:500;">'.number_format($it_price).'원</span>';
+                        }
+                    }
+                    ?>
+                    </div>
+                </div>
 			</a>
 		</div>
 	<?php } // end for ?>
 	<?php if(!$list_cnt) { ?>
-		<div class="list-none">등록된 상품이 없습니다.</div>
+		<div class="list-none">검색된 상품이 없습니다.</div>
 	<?php } ?>
 </div>
+
 <script>
 $(document).ready(function(){
 	$('.list-wrap').imagesLoaded(function(){

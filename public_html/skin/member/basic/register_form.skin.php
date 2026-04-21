@@ -52,7 +52,12 @@ if($header_skin)
 				<label for="reg_mb_id">아이디 <span class="orangered">*</span><strong class="sound_only">필수</strong></label>
 			</div>
 			<div class="reg_content">
-				<input type="text" name="mb_id" value="<?php echo $member['mb_id'] ?>" id="reg_mb_id" <?php echo $required ?> <?php echo $readonly ?> class="input_com" minlength="3" maxlength="20">
+				<div class="flex_box">
+					<input type="text" name="mb_id" value="<?php echo $member['mb_id'] ?>" id="reg_mb_id" <?php echo $required ?> <?php echo $readonly ?> class="input_com" minlength="3" maxlength="20">
+					<?php if ($w == "") { ?>
+						<button type="button" class="reg_btn" style="margin-top:0px;" onclick="trigger_id_check();">중복확인</button>
+					<?php } ?>
+				</div>
 			</div>
 		</div><!--reg_write_box end-->
 		
@@ -283,6 +288,30 @@ function togglePassword(inputId, btn) {
         input.type = 'password';
         icon.setAttribute('icon', 'solar:eye-closed-linear');
     }
+}
+
+// 중복확인 동작 (버튼 클릭)
+function trigger_id_check() {
+	var mb_id = $('#reg_mb_id').val();
+	if(mb_id.length < 3) {
+		alert('아이디를 3문자 이상 입력해 주십시오.');
+		$('#reg_mb_id').focus();
+		return;
+	}
+	
+	if (/[^a-z0-9_]/.test(mb_id)) {
+        alert("아이디는 영문소문자, 숫자, _ 만 입력하세요.");
+        return;
+    }
+
+	// 그누보드 jquery.register_form.js 의 reg_mb_id_check() 사용
+	var msg = reg_mb_id_check();
+	if (msg) {
+		alert(msg);
+		$('#reg_mb_id').focus();
+	} else {
+		alert('사용 가능한 아이디입니다.');
+	}
 }
 
 $(function() {

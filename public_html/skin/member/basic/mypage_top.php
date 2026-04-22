@@ -42,7 +42,8 @@ $total_misu = (int)$misuRes['total_misu'];
 		<div class="dash-card profile-card">
 			<?php
 			$mb_lv = (int)$member['mb_level'];
-			if ($mb_lv >= 6)     $grade_name = 'VIP';
+			if ($mb_lv == 10)    $grade_name = '관리자';
+			elseif ($mb_lv >= 6) $grade_name = 'VIP';
 			elseif ($mb_lv == 5) $grade_name = '골드';
 			elseif ($mb_lv == 4) $grade_name = '실버';
 			else                 $grade_name = '신규';
@@ -98,10 +99,10 @@ $total_misu = (int)$misuRes['total_misu'];
 			</div>
 			<div class="grade-condition">월 구매액 200만원 이상</div>
 			<div class="grade-benefit-next">✓ 최상위 VIP 등급입니다</div>
-			<?php } elseif ($mb_lv > 6) { ?>
-			<div class="grade-badge badge-admin">관리자</div>
-			<div class="grade-benefit-title">관리자 계정</div>
-			<div class="grade-benefit-desc">전체 서비스에 대한<br>접근 권한이 있습니다.</div>
+			<?php } elseif ($mb_lv == 10) { ?>
+			<div class="grade-benefit-title">사이트 운영 및 관리</div>
+			<div class="grade-benefit-desc">최고 관리자 계정으로 접속 중입니다.<br>쇼핑몰 전체 서비스에 대한 모든 접근 및<br>수정 권한이 부여되어 있습니다.</div>
+			<div class="grade-benefit-next">우측 하단의 <b>[관리자]</b> 버튼을 이용하세요</div>
 			<?php } else { ?>
 			<div class="grade-badge badge-new">일반</div>
 			<div class="grade-benefit-title">기본 회원</div>

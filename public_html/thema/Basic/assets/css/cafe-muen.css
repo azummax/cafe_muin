@@ -1633,26 +1633,26 @@ body input:focus, body select:focus, body textarea:focus { outline-color: var(--
 
 
 /* My Page B2B Dashboard */
-.b2b-dashboard { margin-bottom: 40px; }
-.dashboard-header { margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 15px; }
+.b2b-dashboard { margin-top: 70px; margin-bottom: 60px; }
+.dashboard-header { margin-bottom: 30px; border-bottom: 2px solid #222; padding-bottom: 15px; }
 .dashboard-header h2 { font-size: 25px; font-weight: 700; color: #222; margin: 0; }
 .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.dash-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.03); transition: box-shadow 0.3s; }
+.dash-card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.03); transition: box-shadow 0.3s; } .dash-card { overflow: visible; }
 .dash-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
 .profile-card { background: #fafafa; }
-.user-grade { display: inline-block; background: var(--cm-primary); color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+.user-grade { display: inline-block; background: var(--cm-primary); color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
 .user-name { display: block; font-size: 24px; color: #222; margin-bottom: 5px; }
-.user-id { font-size: 14px; color: #777; }
+.user-id { font-size: 15px; color: #777; }
 .benefit-box { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #ccc; display: flex; align-items: flex-start; gap: 10px; }
 .benefit-box i { color: var(--cm-primary); font-size: 20px; margin-top: 3px; }
-.benefit-box span { display: block; font-size: 12px; color: #666; }
-.benefit-box strong { display: block; font-size: 14px; color: #222; }
+.benefit-box span { display: block; font-size: 13px; color: #666; }
+.benefit-box strong { display: block; font-size: 15px; color: #222; }
 .misu-card { display: flex; flex-direction: column; justify-content: center; }
 .card-title { font-size: 16px; font-weight: 600; color: #555; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
 .card-value { font-size: 32px; font-weight: 700; color: #222; margin-bottom: 10px; }
 .card-value .text-danger { color: #e53e3e; }
 .card-value span { font-size: 18px; font-weight: 400; margin-left: 5px; }
-.card-desc { font-size: 13px; color: #888; }
+.card-desc { font-size: 14px; color: #888; }
 .stat-group { display: flex; flex-direction: column; gap: 15px; justify-content: center; padding: 20px; }
 .stat-item a { display: flex; align-items: center; text-decoration: none; padding: 10px; border-radius: 8px; transition: background 0.3s; }
 .stat-item a:hover { background: #f5f5f5; }
@@ -1660,19 +1660,61 @@ body input:focus, body select:focus, body textarea:focus { outline-color: var(--
 .bg-orange { background: var(--cm-primary); }
 .bg-dark { background: #333; }
 .bg-gray { background: #999; }
-.stat-info span { display: block; font-size: 13px; color: #666; margin-bottom: 2px; }
+.stat-info span { display: block; font-size: 14px; color: #666; margin-bottom: 2px; }
 .stat-info strong { display: block; font-size: 18px; font-weight: 700; color: #222; }
 /* My Page Action Row */
 .b2b-action-row td { background: #fafafa; border-top: none !important; border-bottom: 1px solid #ddd; padding: 10px 20px !important; }
-.action-btn-group a { display: inline-flex; align-items: center; justify-content: center; font-size: 13px; padding: 6px 12px; border-radius: 4px; text-decoration: none; margin-left: 5px; transition: all 0.2s; }
-.btn-action.view { border: 1px solid #aaa; color: #555; background: #fff; }
-.btn-action.view:hover { background: #eee; }
-.btn-action.print { border: 1px solid var(--cm-primary); color: var(--cm-primary); background: #fff; }
-.btn-action.print:hover { background: var(--cm-primary); color: #fff; }
+.action-btn-group a { display: inline-flex; align-items: center; justify-content: center; font-size: 13px; padding: 6px 12px; border-radius: 4px; text-decoration: none !important; margin: 0; transition: all 0.2s; width: 100%; box-sizing: border-box; }
+/* 주문상세: primary 컬러 */
+.btn-action.view { border: 1px solid var(--cm-primary); color: var(--cm-primary); background: #fff; }
+.btn-action.view:hover { background: var(--cm-primary); color: #fff; border-color: var(--cm-primary); }
+/* 거래명세서: black 컬러 */
+.btn-action.print { border: 1px solid #222; color: #222; background: #fff; }
+.btn-action.print:hover { background: var(--cm-primary); color: #fff; border-color: var(--cm-primary); }
 .btn-action i { margin-right: 5px; }
-.status-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
-.status-waiting { background: #ffe4cc; color: #d06000; }
-.status-shipping { background: #e0f2fe; color: #026aa7; }
+/* 상태 뱃지 - 버튼과 동일한 사이즈 */
+.status-badge { display: block; padding: 6px 12px; border-radius: 4px; font-size: 13px; font-weight: 600; white-space: nowrap; text-align: center; margin-bottom: 4px; box-sizing: border-box; }
+/* 입금확인중 - gray */
+.status-confirm { background: #ededed; color: #666; border: 1px solid #ccc; }
+/* 입금완료 - black outlined */
+.status-paid { background: #e0e0e0; color: #222; border: 1px solid #999; }
+/* 상품준비중 - mid gray */
+.status-ready { background: #e8e8e8; color: #444; border: 1px solid #bbb; }
+/* 상품배송 - primary orange */
+.status-shipping { background: #fa5f03; color: #fff; border: 1px solid #fa5f03; }
+/* 배송완료 - black filled */
+.status-done { background: #222; color: #fff; border: 1px solid #222; }
+/* 주문취소 - faded gray */
+.status-cancel { background: #f0f0f0; color: #aaa; border: 1px solid #ddd; }
+/* Grade Benefit Card */
+.grade-benefit-card { display: flex; flex-direction: column; justify-content: center; gap: 10px; overflow: visible; }
+.grade-badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 14px; font-weight: 700; align-self: flex-start; margin-bottom: 4px; }
+.badge-new { background: #fff; color: var(--cm-primary); border: 1px solid var(--cm-primary); }
+.badge-silver { background: #fff; color: var(--cm-primary); border: 1px solid var(--cm-primary); }
+.badge-gold { background: #fff; color: var(--cm-primary); border: 1px solid var(--cm-primary); }
+.badge-vip { background: #fff; color: var(--cm-primary); border: 1px solid var(--cm-primary); }
+.grade-discount { display: flex; align-items: baseline; gap: 8px; }
+.grade-rate { font-size: 34px; font-weight: 800; color: var(--cm-primary); line-height: 1; letter-spacing: -1px; }
+.grade-rate-label { font-size: 14px; color: #555; line-height: 1.3; }
+.grade-benefit-title { font-size: 18px; font-weight: 700; color: #222; }
+.grade-benefit-desc { font-size: 15px; color: #666; line-height: 1.6; }
+.grade-condition { font-size: 13px; color: #888; padding: 4px 8px; background: #f5f5f5; border-radius: 4px; display: inline-block; }
+.grade-benefit-next { font-size: 14px; color: #888; border-top: 1px dashed #e0e0e0; padding-top: 8px; margin-top: 2px; }
+.grade-benefit-next b { color: var(--cm-primary); font-weight: 700; }
+.grade-next-wrap { border-top: 1px dashed #e0e0e0; padding-top: 8px; margin-top: 0; display: flex; flex-direction: column; gap: 6px; }
+.grade-next-wrap .grade-benefit-next { border-top: none; padding-top: 0; margin-top: 0; }
+.grade-next-cond { font-size: 13px; color: #aaa; line-height: 1.6; }
+/* Profile Card Center + Action Buttons */
+.profile-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0; }
+.profile-info { display: flex; flex-direction: column; align-items: center; }
+.profile-actions { display: flex; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #ebebeb; width: 100%; }
+.profile-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; height: 38px; font-size: 14px; font-weight: 500; border-radius: 6px; text-decoration: none !important; transition: all 0.22s ease; letter-spacing: -0.2px; }
+.btn-inquiry { border: 1px solid var(--cm-primary); color: var(--cm-primary); background: #fff; }
+.btn-inquiry:hover { background: var(--cm-primary); color: #fff; }
+.btn-logout { border: 1px solid #ddd; color: #888; background: #fff; }
+.btn-logout:hover { border-color: #222; color: #222; background: #f5f5f5; }
+
+
 @media(max-width: 991px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
 

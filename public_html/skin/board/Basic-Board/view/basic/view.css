@@ -114,7 +114,7 @@
 
 /*************** 기본 end ***************************************************************************************************************************************************************************************/
 
-.view_tit{ margin-bottom:20px; }
+.view_tit{ margin-top:70px; margin-bottom:20px; }
 .view_tit .view_subject{ font-size:28px; font-weight:700; color:#333; line-height:1.4;}
 
 .view_box{ border-top:2px solid #333; } 
@@ -127,21 +127,20 @@
 .view_content{ font-size:16px; line-height:1.6; color:#333; margin-bottom:40px; text-align:left;}
 .view_content .apms-autowrap{margin-bottom:40px;}
 
-.view_file{ position:relative; background:#f4f4f4; padding:30px 30px 30px 130px;}
-.view_file:first-child{ margin-bottom:0px; }
-.view_file strong{ position:absolute; top:37px; left:30px; font-size:16px; color:#333; line-height:1; font-weight:500; }
-.view_file li{margin-bottom:10px;}
+.view_file_label{ display:block; font-size:18px; font-weight:600; color:#333; margin-top:40px; margin-bottom:10px; text-align:left; }
+.view_file{ border:1px solid #ddd; border-radius:8px; padding:20px; background:#fafafa; }
+.view_file ul{ list-style:none; padding:0; margin:0; }
+.view_file li{margin-bottom:8px;}
 .view_file li:last-child{margin-bottom:0;}
-.view_file li a{ padding-left: 40px; font-size:16px; line-height:26px; background-image:url('/thema/Basic/img/view_file01.png'); background-position:left center; background-repeat:no-repeat; transition:all 0.3s; }
-.view_file li a:hover,
-.view_file li a:focus{ color:#fa5f03; text-decoration:underline; text-underline-position:under; background-image:url('/thema/Basic/img/view_file02.png');}
+.view_file li a.file_down_link{ display:flex; align-items:center; padding:12px 20px; background:#fff; border:1px solid #eaeaea; border-radius:6px; color:#555; text-decoration:none; transition:all 0.3s; box-sizing:border-box; }
+.view_file li a.file_down_link i{ font-size:20px; margin-right:12px; width:22px; text-align:center; }
+.view_file li a.file_down_link .file_name{ font-weight:500; }
+.view_file li a.file_down_link .file_size{ color:#999; font-size:13px; margin-left:8px; }
+.view_file li a.file_down_link:hover{ border-color:#333; box-shadow:0 4px 12px rgba(0,0,0,0.06); transform:translateY(-2px); color:#222; }
 .view_file.view_link{ margin-top:15px;}
-.view_file.view_link li a{ background-image:url('/thema/Basic/img/view_link01.png');}
-.view_file.view_link li a:hover,
-.view_file.view_link li a:focus{ background-image:url('/thema/Basic/img/view_link02.png');}
 
 @media all and ( max-width:1024px){
-	.view_tit{ margin-bottom:15px; }
+	.view_tit{ margin-top:50px; margin-bottom:15px; }
 	.view_tit .view_subject{ font-size:24px; }
 
 	.view_top{ padding:15px 0; }
@@ -152,9 +151,9 @@
 	.view_content{ margin-bottom:30px; }
 	.view_content .apms-autowrap{margin-bottom:30px;}
 
-	.view_file{ padding:15px 20px 15px 100px; }
-	.view_file strong{ font-size:14px; top:20px; left:20px; }
-	.view_file li a{ font-size:14px; line-height:20px; background-size:20px; padding-left:30px; }
+	.view_file_label{ font-size:16px; margin-top:30px; }
+	.view_file{ padding:15px; }
+	.view_file li a.file_down_link{ padding:10px 15px; font-size:14px; }
 }
 @media all and ( max-width:768px){
 	.view_tit .view_subject{ font-size:18px; }
@@ -166,9 +165,9 @@
 	.view_content{ font-size:14px; margin-bottom:20px; }
 	.view_content .apms-autowrap{margin-bottom:20px;}
 
-	.view_file{ padding:15px; }
-	.view_file strong{ position:static; display:block; margin-bottom:5px; line-height:1.4; }
-	.view_file li a{ font-size:13px; }
+	.view_file_label{ font-size:15px; margin-top:25px; }
+	.view_file{ padding:12px; }
+	.view_file li a.file_down_link{ padding:10px 12px; font-size:13px; }
 }
 @media all and ( max-width:420px){
 	.view_top span{ display:block; margin:3px 0;}

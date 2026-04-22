@@ -189,14 +189,18 @@ if($header_skin)
 
 		<div class="reg_write_box">
 			<div class="reg_tit">
-				<label for="biz_cert_file">사업자등록증 (파일첨부) <?php if($w == '') { ?><span class="orangered">*</span><?php } ?></label>
+				<label for="biz_cert_file">사업자등록증 <?php if($w == '') { ?><span class="orangered">*</span><?php } ?></label>
 			</div>
 			<div class="reg_content">
-				<input type="file" name="biz_cert_file" id="biz_cert_file" <?php echo ($w == '') ? 'required' : ''; ?> class="input_com" style="cursor:pointer; display:flex; align-items:center; padding:10px 10px; height:46px; box-sizing:border-box;">
+				<input type="file" name="biz_cert_file" id="biz_cert_file" <?php echo ($w == '') ? 'required' : ''; ?> style="display:none;">
+				<div class="flex_box"  style="align-items:center;">
+					<button type="button" class="reg_btn" style="margin-top:0px; white-space:nowrap; flex-shrink:0;" onclick="document.getElementById('biz_cert_file').click();">파일 선택</button>
+					<span id="biz_cert_file_name" style="margin-left:12px; font-size:14px; color:#888;">선택된 파일 없음</span>
+				</div>
 				<?php if ($w == 'u' && $member['mb_3']) { ?>
-					<div style="margin-top:10px;">
-						<a href="/data/member_biz/<?php echo $member['mb_3'] ?>" target="_blank" style="text-decoration:underline;">등록된 사업자등록증 보기</a>
-					</div>
+				<div style="margin-top:10px;">
+					<a href="/data/member_biz/<?php echo $member['mb_3'] ?>" target="_blank" style="text-decoration:underline;">등록된 사업자등록증 보기</a>
+				</div>
 				<?php } ?>
 			</div>
 		</div><!--reg_write_box end-->
@@ -277,6 +281,13 @@ if($header_skin)
 </form>
 
 <script>
+// 사업자등록증 파일 선택 시 파일명 업데이트
+document.getElementById('biz_cert_file').addEventListener('change', function() {
+    var fileName = this.files.length > 0 ? this.files[0].name : '선택된 파일 없음';
+    document.getElementById('biz_cert_file_name').textContent = fileName;
+    document.getElementById('biz_cert_file_name').style.color = this.files.length > 0 ? '#333' : '#888';
+});
+
 // Toggle Password Visibility
 function togglePassword(inputId, btn) {
     var input = document.getElementById(inputId);

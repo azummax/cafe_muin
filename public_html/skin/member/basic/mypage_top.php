@@ -40,28 +40,73 @@ $total_misu = (int)$misuRes['total_misu'];
 	<div class="dashboard-grid">
 		<!-- 회원 프로필 카드 -->
 		<div class="dash-card profile-card">
+			<?php
+			$mb_lv = (int)$member['mb_level'];
+			if ($mb_lv >= 6)     $grade_name = 'VIP';
+			elseif ($mb_lv == 5) $grade_name = '골드';
+			elseif ($mb_lv == 4) $grade_name = '실버';
+			else                 $grade_name = '신규';
+			?>
 			<div class="profile-info">
-				<span class="user-grade"><?php echo $member['grade'];?></span>
+				<span class="user-grade"><?php echo $grade_name; ?></span>
 				<strong class="user-name"><b><?php echo $member['mb_name'];?></b>님</strong>
 				<span class="user-id">(@<?php echo $member['mb_id'];?>)</span>
 			</div>
-			<?php if($member['mb_level'] >= 2) { ?>
-			<div class="benefit-box">
-				<i class="fa fa-gift"></i>
-				<div>
-					<span>도매회원 전용 혜택</span>
-					<strong>전 상품 기본 할인 적용중</strong>
-				</div>
+			<div class="profile-actions">
+				<a href="<?php echo G5_BBS_URL; ?>/qalist.php" class="profile-btn btn-inquiry">1:1 문의</a>
+				<a href="<?php echo $at_href['logout']; ?>" class="profile-btn btn-logout">로그아웃</a>
 			</div>
-			<?php } ?>
 		</div>
 		
-		<!-- 미수금/결제 카드 -->
-		<div class="dash-card misu-card">
-			<div class="card-title">결제 대기 (미수금) <a href="/shop/orderinquiry.php" class="view-more"><i class="fa fa-angle-right"></i></a></div>
-			<div class="card-value">
-				<strong class="<?php echo $total_misu > 0 ? 'text-danger' : ''; ?>"><?php echo number_format($total_misu); ?></strong><span>원</span>
+		<!-- 회원등급 혜택 카드 -->
+		<div class="dash-card grade-benefit-card">
+			<?php
+			$mb_lv = (int)$member['mb_level'];
+			if ($mb_lv == 2) {
+			?>
+			<div class="grade-badge badge-new">신규 회원 안내</div>
+			<div class="grade-benefit-title">승인 대기 중</div>
+			<div class="grade-benefit-desc">관리자 승인 후<br>제품 구매가 가능합니다.</div>
+			<div class="grade-benefit-next">승인 완료 후 실버 등급으로 시작됩니다.</div>
+			<?php } elseif ($mb_lv == 4) { ?>
+			<div class="grade-badge badge-silver">실버 등급 혜택</div>
+			<div class="grade-discount">
+				<span class="grade-rate">3%</span>
+				<span class="grade-rate-label">할인 쿠폰 매달 자동 지급</span>
 			</div>
+			<div class="grade-condition">월 구매액 100만원 미만</div>
+			<div class="grade-next-wrap">
+				<div class="grade-benefit-next">→ 골드 달성 시 <b>8%</b> 할인</div>
+				<div class="grade-next-cond">월 구매액 100만원 이상이 되면 골드 등급으로 승급됩니다.</div>
+			</div>
+			<?php } elseif ($mb_lv == 5) { ?>
+			<div class="grade-badge badge-gold">골드 등급 혜택</div>
+			<div class="grade-discount">
+				<span class="grade-rate">8%</span>
+				<span class="grade-rate-label">할인 쿠폰 매달 자동 지급</span>
+			</div>
+			<div class="grade-condition">월 구매액 100만원~200만원</div>
+			<div class="grade-next-wrap">
+				<div class="grade-benefit-next">→ VIP 달성 시 <b>15%</b> 할인</div>
+				<div class="grade-next-cond">월 구매액 200만원 이상이 되면 VIP 등급으로 승급됩니다.</div>
+			</div>
+			<?php } elseif ($mb_lv == 6) { ?>
+			<div class="grade-badge badge-vip">VIP 등급 혜택</div>
+			<div class="grade-discount">
+				<span class="grade-rate">15%</span>
+				<span class="grade-rate-label">할인 쿠폰 매달 자동 지급</span>
+			</div>
+			<div class="grade-condition">월 구매액 200만원 이상</div>
+			<div class="grade-benefit-next">✓ 최상위 VIP 등급입니다</div>
+			<?php } elseif ($mb_lv > 6) { ?>
+			<div class="grade-badge badge-admin">관리자</div>
+			<div class="grade-benefit-title">관리자 계정</div>
+			<div class="grade-benefit-desc">전체 서비스에 대한<br>접근 권한이 있습니다.</div>
+			<?php } else { ?>
+			<div class="grade-badge badge-new">일반</div>
+			<div class="grade-benefit-title">기본 회원</div>
+			<div class="grade-benefit-desc">관리자 승인 후 이용 가능합니다.</div>
+			<?php } ?>
 		</div>
 
 		<!-- 미니 스탯 지표 -->

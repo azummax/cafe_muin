@@ -173,13 +173,17 @@ body .board_btn{display:inline-block;padding:0 35px;height:44px;line-height:44px
 /*酉?怨듯넻*/
 .view_paging{border-top:1px solid #ddd;margin-top:60px;}
 .view_paging > a,
-.view_paging > div{display:flex;align-items:center;font-size:16px;line-height:1.2;padding:25px 35px;border-bottom:1px solid #ddd;}
+.view_paging > div{display:flex;align-items:center;font-size:16px;line-height:1.2;padding:25px 35px;border-bottom:1px solid #ddd;transition:background 0.25s ease;}
 .view_paging > a > b,
-.view_paging > div > b{width:85px;font-weight:500;background-repeat:no-repeat;background-position:right top 5px;}
+.view_paging > div > b{width:85px;font-weight:500;background-repeat:no-repeat;background-position:right top 5px;transition:color 0.25s ease;}
 .view_paging .view_paging_prev > b{background-image:url('/thema/Basic/img/view_paging_prev.png');}
 .view_paging .view_paging_next > b{background-image:url('/thema/Basic/img/view_paging_next.png');}
 .view_paging > a > p,
-.view_paging > div > p{width:calc(100% - 110px);margin-left:25px;padding-left:25px;border-left:1px solid #ddd;color:#999;transition:all 0.3s;}
+.view_paging > div > p{width:calc(100% - 110px);margin-left:25px;padding-left:25px;border-left:1px solid #ddd;color:#999;transition:color 0.25s ease;}
+.view_paging > a:focus,
+.view_paging > a:hover{background:#fff8f5;}
+.view_paging > a:focus b,
+.view_paging > a:hover b{color:#fa5f03;}
 .view_paging > a:focus p,
 .view_paging > a:hover p{color:#333;}
 

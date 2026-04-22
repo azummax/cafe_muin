@@ -40,12 +40,12 @@ if($header_skin)
 			        $uid = md5($row['od_id'].$row['od_time'].$row['od_ip']);
 
 					switch($row['od_status']) {
-						case '주문' : $od_status = '입금확인중'; break;
-						case '입금' : $od_status = '입금완료'; break;
-						case '준비' : $od_status = '상품준비중'; break;
-						case '배송' : $od_status = '상품배송'; break;
-						case '완료' : $od_status = '배송완료'; break;
-						default		: $od_status = '주문취소'; break;
+						case '주문' : $od_status = '입금확인중'; $status_class = 'confirm'; break;
+						case '입금' : $od_status = '입금완료';   $status_class = 'paid';    break;
+						case '준비' : $od_status = '상품준비중'; $status_class = 'ready';   break;
+						case '배송' : $od_status = '상품배송';   $status_class = 'shipping'; break;
+						case '완료' : $od_status = '배송완료';   $status_class = 'done';    break;
+						default		: $od_status = '주문취소';   $status_class = 'cancel';  break;
 					}
 			    ?>
 					<tr>
@@ -60,11 +60,11 @@ if($header_skin)
 						<td><?php echo display_price($row['od_misu']); ?></td>
 						<td>
 							<div style="margin-bottom:6px;">
-								<span class="status-badge status-<?php echo ($row['od_status'] == '주문' || $row['od_status'] == '입금') ? 'waiting' : 'shipping'; ?>" style="font-size:12px; padding:4px 8px; border-radius:3px; background:#f5f5f5; color:#555;"><?php echo $od_status; ?></span>
+								<span class="status-badge status-<?php echo $status_class; ?>"><?php echo $od_status; ?></span>
 							</div>
 							<div class="action-btn-group" style="display:flex; flex-direction:column; gap:4px;">
-								<a href="<?php echo G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>" class="btn-action view" style="font-size:12px; color:#fa5f03; text-decoration:underline;">주문상세</a>
-								<a href="javascript:void(0);" onclick="window.open('<?php echo G5_SHOP_URL; ?>/orderreceipt.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>', 'receipt', 'width=600,height=800,scrollbars=yes');" class="btn-action print" style="font-size:12px; color:#888;">거래명세서</a>
+								<a href="<?php echo G5_SHOP_URL; ?>/orderinquiryview.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>" class="btn-action view">주문상세</a>
+								<a href="javascript:void(0);" onclick="window.open('<?php echo G5_SHOP_URL; ?>/orderreceipt.php?od_id=<?php echo $row['od_id']; ?>&amp;uid=<?php echo $uid; ?>', 'receipt', 'width=600,height=800,scrollbars=yes');" class="btn-action print">거래명세서</a>
 							</div>
 						</td>
 					</tr>

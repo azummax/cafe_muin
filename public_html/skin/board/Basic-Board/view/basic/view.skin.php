@@ -69,23 +69,10 @@ $view_subject = get_text($view['wr_subject']);
 			</div>
 
 			<?php if($attach_list){ ?>
-			<style>
-			.view_file { border:1px solid #ddd; border-radius:8px; padding:20px; background:#fafafa; margin-top:40px; }
-			.view_file strong { display:block; font-size:16px; margin-bottom:15px; color:#333; font-weight:600; }
-			.view_file ul { list-style:none; padding:0; margin:0; }
-			.view_file ul li { margin-bottom:8px; }
-			.view_file ul li:last-child { margin-bottom:0; }
-			.view_file ul li a.file_down_link { display:flex; align-items:center; padding:12px 20px; background:#fff; border:1px solid #eaeaea; border-radius:6px; color:#555; text-decoration:none; transition:all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-sizing:border-box; justify-content:flex-start; }
-			.view_file ul li a.file_down_link i { font-size:20px; margin-right:12px; width:22px; text-align:center; }
-			.view_file ul li a.file_down_link .file_name { font-weight:500; font-family:var(--cm-font); }
-			.view_file ul li a.file_down_link .file_size { color:#999; font-size:13px; margin-left:8px; }
-			.view_file ul li a.file_down_link:hover { border-color:#333; box-shadow:0 5px 15px rgba(0,0,0,0.06); transform:translateY(-2px); color:#222; }
-			.view_file ul li a.file_down_link::before { display:none !important; content:''; }
-			</style>
+			<strong class="view_file_label">첨부파일</strong>
 			<div class="view_file">
-				<strong><i class="fa fa-paperclip"></i> 첨부파일</strong>
 				<ul>
-					<?php echo $attach_list;  ?>
+					<?php echo $attach_list; ?>
 				</ul>
 			</div>
 			<?php } ?>

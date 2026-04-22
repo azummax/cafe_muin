@@ -47,8 +47,10 @@
 .order_btn_box{display:flex;justify-content:center;gap:0 14px;}
 .order_btn_box.grid3{gap:0 6px;}
 .order_btn_box.grid3 .order_btn{width:200px;height:56px;line-height:56px;font-size:16px;}
-.order_btn{display:inline-block;width:320px;height:62px;line-height:62px;border:1px solid #333;border-radius:5px;text-align:center;font-size:18px;}
+.order_btn{display:inline-block;width:320px;height:62px;line-height:62px;border:1px solid #333;border-radius:5px;text-align:center;font-size:18px;color:#333;background:#fff;transition:background 0.22s ease, border-color 0.22s ease, color 0.22s ease;}
+.order_btn:hover{background:#fa5f03;border-color:#fa5f03;color:#fff !important;}
 .order_btn.on{border-color:#fa5f03;background:#fa5f03;color:#fff;}
+.order_btn.on:hover{background:#d94e00;border-color:#d94e00;}
 
 #cart_total_box{display:flex;justify-content:center;background:#f4f4f4;padding:55px;margin:50px 0;}
 #cart_total_box > div{position:relative;}

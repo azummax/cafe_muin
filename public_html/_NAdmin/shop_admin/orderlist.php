@@ -599,7 +599,7 @@ if( function_exists('pg_setting_check') ){
     <?php } ?>
     <input type="submit" value="선택수정" class="btn_submit" onclick="document.pressed=this.value">
 <?php } ?>
-    <?php if ($od_status == '주문' || $od_status == '전체취소') { ?> <span>주문 또는 전체취소 상태에서만 삭제가 가능하며, 전체취소는 입금액이 없는 주문만 삭제됩니다.</span> <input type="submit" value="선택삭제" class="btn_submit" onclick="document.pressed=this.value"><?php } ?>
+    <?php // if ($od_status == '주문' || $od_status == '전체취소') { ?> <span>주문 또는 전체취소 상태에서만 삭제가 가능하며, 입금액이 없는 주문만 삭제됩니다.</span> <input type="submit" value="선택삭제" class="btn_submit" onclick="document.pressed=this.value"><?php // } ?>
 </div>
 
 <div class="local_desc02 local_desc">
